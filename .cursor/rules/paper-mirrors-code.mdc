@@ -1,0 +1,14 @@
+---
+description: Paper.design must mirror code only — never invent UI
+alwaysApply: true
+---
+
+# Paper ↔ code sync
+
+When drawing or updating anything in Paper.design for this portfolio:
+
+- **Only represent what already exists in code** (Astro pages, MDX frontmatter/body, `src/ds` primitives, tokens).
+- **Do not invent** Media frames, placeholders, captions, screenshots, sections, stack tags, metrics, or copy that are not in the source files.
+- If code has no `<Media>` (or equivalent), the Paper artboard must not show media boxes.
+- Prefer reading the live source (`src/content/projects/*.mdx`, page components, DESIGN.md) before mutating Paper.
+- Paper is for reviewing / revising the shipped UI — not for speculative design that the codebase does not yet have.

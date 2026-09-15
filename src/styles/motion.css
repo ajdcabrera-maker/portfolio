@@ -1,0 +1,126 @@
+/* Subtle motion — respect reduced-motion; keep transitions quiet. */
+
+@layer base {
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+}
+
+@layer components {
+  /* Page enter */
+  .motion-page {
+    animation: motion-page-in 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  @keyframes motion-page-in {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* Scroll reveal */
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(12px);
+    transition:
+      opacity 520ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  [data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Soft interactive lift */
+  .motion-lift {
+    transition:
+      border-color 200ms ease,
+      background-color 200ms ease,
+      transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .motion-lift:hover {
+    transform: translateY(-1px);
+  }
+
+  .motion-press:active {
+    transform: translateY(0) scale(0.98);
+  }
+
+  /* Lightbox */
+  dialog[data-media-dialog][open] {
+    animation: motion-dialog-in 280ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  dialog[data-media-dialog][open] [data-media-panel] {
+    animation: motion-panel-in 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  @keyframes motion-dialog-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes motion-panel-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px) scale(0.985);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* Astro View Transitions — soft crossfade */
+  @media (prefers-reduced-motion: no-preference) {
+    ::view-transition-old(root) {
+      animation: 180ms ease-out both motion-vt-fade-out;
+    }
+
+    ::view-transition-new(root) {
+      animation: 240ms ease-out both motion-vt-fade-in;
+    }
+  }
+
+  @keyframes motion-vt-fade-out {
+    to {
+      opacity: 0;
+    }
+  }
+
+  @keyframes motion-vt-fade-in {
+    from {
+      opacity: 0;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-page,
+  [data-reveal],
+  [data-reveal].is-visible,
+  .motion-lift,
+  .motion-lift:hover,
+  .motion-press:active,
+  dialog[data-media-dialog][open],
+  dialog[data-media-dialog][open] [data-media-panel] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+}

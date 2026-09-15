@@ -1,6 +1,6 @@
 ---
 title: "AI-Powered CV-to-Portfolio Builder"
-subtitle: "Designing a non-technical generative engine that transforms raw CVs and visual inspiration into token-governed web layouts."
+subtitle: "Turn a messy CV and a mood photo into DESIGN.md tokens and a themed, publishable layout."
 role: "Product Architect & AI UX Designer"
 timeline: "2026"
 metrics: ["Zero-Jargon Theme Engine", "Generative UI Logic"]
@@ -8,24 +8,56 @@ stack: ["AI UX Patterns", "Token Mapping", "Generative UI", "Paper.design"]
 order: 2
 ---
 
+import Media from '../../ds/Media.astro';
+
 ## Executive Summary
 
-Building and maintaining a professional portfolio is one of the most tedious tasks for developers and designers. Non-designers struggle with layout choices, typography hierarchies, and visual token consistency.
+Most people struggle with portfolio layout, type hierarchy, and token consistency, not with writing their own bio.
 
-This project conceptualizes an **AI-Native Portfolio Generator** that ingests raw, outdated CVs alongside user-provided mood photos or web links, translating them into fully themed, token-governed web layouts using dynamic `DESIGN.md` specifications.
+Folio.md is an AI portfolio generator that takes an outdated CV plus a mood photo or URL, then outputs refined copy, a custom `DESIGN.md` theme, and deployable web code.
 
 ---
 
 ## Product Workflow
 
-1. **User Input**: Outdated CV PDF, Photo/Web Link inspiration, and Conversational Q&A.
-2. **AI Engine Processing**: Parses CV, asks clarifying prompts for career gaps, and extracts color palette/style rules.
-3. **Dynamic Output**: Refined Copy, Custom `DESIGN.md` Theme, and Published Web Code.
+1. **User Input**: Outdated CV PDF, photo or web-link inspiration, and short Q&A.
+2. **AI Engine Processing**: Parse the CV, fill career gaps through prompts, extract palette and type rules.
+3. **Dynamic Output**: Refined copy, custom `DESIGN.md` theme, published site code.
+
+<Media
+  items={[
+    {
+      src: '/projects/2-portfolio-ai/cv-parsed.jpg',
+      alt: 'Folio.md step 1: CV ingestion with profile fields and work experience parsed from an uploaded PDF',
+      caption: 'CV parsed',
+    },
+    {
+      src: '/projects/2-portfolio-ai/projects-filled.jpg',
+      alt: 'Folio.md step 2: mandatory project intake with role, metrics, challenge, and outcomes filled in',
+      caption: 'Projects filled',
+    },
+  ]}
+/>
 
 ---
 
 ## Core AI UX Patterns
 
-* **Conversational Gap Analysis**: Filling career gaps dynamically through targeted, conversational Q&A.
-* **Zero-Jargon Visual Theme Extraction**: Extracting palettes and fonts from photos without asking for hex codes.
-* **Real-Time Token Governance**: Keeping generated components locked to system tokens while preserving full human control over layout density.
+* **Conversational Gap Analysis**: Fill career gaps with targeted Q&A instead of blank forms.
+* **Zero-Jargon Visual Theme Extraction**: Pull palettes and fonts from photos, no hex codes required.
+* **Real-Time Token Governance**: Generated components stay on system tokens; humans still control layout density.
+
+<Media
+  items={[
+    {
+      src: '/projects/2-portfolio-ai/moodboard-confirm.jpg',
+      alt: 'Folio.md step 4: token-efficient moodboard confirming a generated dark developer theme from DESIGN.md',
+      caption: 'Theme confirm',
+    },
+    {
+      src: '/projects/2-portfolio-ai/portfolio-landing.jpg',
+      alt: 'Generated portfolio landing page for Maya Chen with dark theme, hero, and selected work cards',
+      caption: 'Published site',
+    },
+  ]}
+/>

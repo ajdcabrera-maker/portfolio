@@ -10,21 +10,21 @@ import Button from '../ds/Button.astro';
 const principles = [
   {
     number: '01',
-    title: 'Code-Grounded Design',
+    title: 'Design in Code Context',
     description:
-      'Interfaces designed with system constraints, DOM structure, and token governance in mind, so design intent survives handoff and implementation.',
+      'Know the DOM, CSS constraints, and component state before pushing pixels, so handoff matches what ships.',
   },
   {
     number: '02',
-    title: 'Data & Usability First',
+    title: 'Data Over Vibe',
     description:
-      'Grounding decisions in usability testing, conversion metrics, and real-world impact rather than preference alone.',
+      'Validate interactions with usability testing, conversion rates, and real user feedback.',
   },
   {
     number: '03',
-    title: 'Agentic Workflows',
+    title: 'Strict Systems Governance',
     description:
-      'Treating LLMs and design tools as collaborative systems built on single sources of truth (contracts, reviews, and automated alignment)',
+      'Build single sources of truth so visual design and codebases stay aligned under agent-assisted work.',
   },
 ];
 
@@ -64,7 +64,7 @@ const toolkit = [
 
 <SiteLayout
   title="About — Aaron Cabrera"
-  description="Designing at the intersection of systems, code, and AI — from enterprise UX leadership to AI-native design ops."
+  description="Web developer turned UX lead. Design systems, consumer platforms, enterprise workflows, and AI-native tooling."
 >
   <main>
     <section class="border-b border-line">
@@ -73,28 +73,23 @@ const toolkit = [
         <h1
           class="mt-4 max-w-3xl text-3xl font-semibold tracking-tight text-ink sm:text-5xl sm:leading-[1.1]"
         >
-          Designing at the Intersection of Systems, Code, and AI.
+          Systems, code, and product design.
         </h1>
 
         <div
           class="mt-10 max-w-2xl space-y-6 text-base leading-relaxed text-ink-muted sm:text-lg"
         >
           <p>
-            I’m a BS Information Technology graduate with a web development
-            foundation who transitioned into end-to-end UX/UI leadership,
-            bringing technical fluency into every design decision.
+            I started in web development (2015–2018) before moving into UX/UI
+            design. Most recently I was Usability &amp; Design Manager at Cebu
+            Pacific Air, where I built the design system from scratch and owned
+            customer-facing web, mobile, and kiosk apps.
           </p>
           <p>
-            I’ve managed high-volume consumer platforms at Cebu Pacific Air,
-            driving +15% CSAT and +3% conversion, and now design enterprise
-            internal software at Partners Group. Translating complex domain
-            logic into clear, multi-role workflows.
-          </p>
-          <p>
-            My current focus is pioneering AI-native workflows using
-            <code class="code-inline">DESIGN.md</code>, Paper MCP, and Cursor
-            to bridge design ops with automated engineering while keeping
-            generated UI aligned to contracts and human review.
+            At Partners Group I work on dense internal enterprise workflows and
+            AI-native design systems, using
+            <code class="code-inline">DESIGN.md</code>, Paper MCP, and Cursor so
+            generated UI stays on contract and in human review.
           </p>
         </div>
       </Container>
@@ -173,8 +168,7 @@ const toolkit = [
               Let’s connect
             </h2>
             <p class="mt-2 text-sm text-ink-muted">
-              Open to conversations about AI-native design systems, Design Ops,
-              and product collaboration.
+              Open to chats about design systems, Design Ops, and product work.
             </p>
           </div>
           <Button href={site.calUrl} external size="md" class="mt-6 sm:mt-0">

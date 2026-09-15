@@ -1,6 +1,6 @@
 ---
 title: "AI Token Governance & Vibe-Code Audit Engine"
-subtitle: "Eliminating AI UI drift using DESIGN.md contracts, Paper MCP visual sandboxing, and human-in-the-loop agentic triage."
+subtitle: "Stop LLM UI drift with DESIGN.md contracts, Paper MCP, and a human-in-the-loop /audit triage flow."
 role: "Product Architect & Systems Lead"
 timeline: "2026"
 metrics: ["0 Token Drift", "Human-in-the-Loop Triage"]
@@ -12,65 +12,68 @@ import Media from '../../ds/Media.astro';
 
 ## Executive Summary
 
-Rapid development with LLM agents like Cursor enables incredible feature velocity, but it introduces severe **vibe-coding drift**: hardcoded hex values, broken slot contracts, and unmaintainable component overrides.
+Cursor and other LLM agents ship features fast, and leave behind hardcoded hex values, broken slots, and one-off component overrides.
 
-This project establishes a three-tier governance architecture using `DESIGN.md` as the machine-readable Single Source of Truth (SOT), Paper.design over local Model Context Protocol (MCP) as a visual sandbox, and a human-in-the-loop triage UI to audit and align production code.
+This project wires three layers together: `DESIGN.md` as the machine-readable source of truth, Paper over MCP as the visual sandbox, and an `/audit` UI so humans decide Adjust, Extend, or Skip before code changes land.
 
 ---
 
 ## The System Architecture
 
-The architecture enforces a strict contract between visual design, machine-readable specifications, and production code:
+Design, specs, and production stay on one contract:
 
-* **Paper.design**: Visual Soft-Lock & MCP Integration (`127.0.0.1:29979/mcp`)
-* **DESIGN.md**: YAML Frontmatter SOT + Prose Contracts
-* **src/ds/**: Production React Contract UI (`tokens.css` + Components)
+* **Paper.design**: Visual soft-lock via local MCP
+* **DESIGN.md**: YAML frontmatter tokens + prose component rules
+* **src/ds/**: Production UI on `tokens.css` and shared components
 
 <Media
   items={[
     {
-      src: '/projects/1-token-bridge/paper-library.png',
-      alt: 'Paper library artboards showing token swatches, color rules, spacing, and radius scales',
+      src: '/projects/1-token-bridge/paper-library.jpg',
+      alt: 'Paper library artboards showing token swatches, color rules, spacing, and radius scales driven by code as the source of truth',
+      caption: 'Paper: design tool, code as SOT',
     },
     {
-      src: '/projects/1-token-bridge/design-md-editor.png',
+      src: '/projects/1-token-bridge/design-md-editor.jpg',
       alt: 'DESIGN.md open in an editor with YAML frontmatter token contracts',
+      caption: 'DESIGN.md structure',
     },
   ]}
 />
 
 ### Read Order & Governance Rules
 
-1. **`audit.md`**: Playbook defining triage actions and governance rules.
-2. **`DESIGN.md`**: The SOT containing machine-readable YAML frontmatter tokens and prose component contracts.
-3. **`src/ds/*`**: The React implementation of the token contracts.
+1. **`audit.md`**: Playbook for triage actions and governance rules.
+2. **`DESIGN.md`**: SOT for YAML tokens and prose component contracts.
+3. **`src/ds/*`**: React implementation of those contracts.
 
 ---
 
 ## Agentic Triage Engine
 
-Instead of relying on passive visual regression, the `/audit` interface presents structured findings for human-in-the-loop review:
+The `/audit` UI lists findings for review instead of silent visual diffs:
 
-* **Adjust (Immediate):** Executes `scripts/apply-audit.mjs` to update product UI to standard tokens instantly.
-* **Extend (Queued):** Writes `audit-pending.json` and queues new component requests into Paper.design via local MCP.
-* **Exception / Skip:** Explicitly logs rationale for non-standard UI overrides.
+* **Adjust (Immediate):** Runs `scripts/apply-audit.mjs` to snap product UI to library tokens.
+* **Extend (Queued):** Writes `audit-pending.json` and queues component requests into Paper via local MCP.
+* **Exception / Skip:** Logs why a non-standard override stays.
 
 <Media
   spans={[6, 3, 3]}
   items={[
     {
-      src: '/projects/1-token-bridge/guinea-audit.png',
+      src: '/projects/1-token-bridge/guinea-audit.jpg',
       alt: 'Guinea audit triage UI comparing local tokens against the library',
+      caption: 'Audit triage',
     },
     {
-      src: '/projects/1-token-bridge/meridian-drift.png',
+      src: '/projects/1-token-bridge/meridian-drift.jpg',
       alt: 'Meridian sign-in screen showing drifted blue and purple tokens before audit apply',
-      caption: 'Before — vibe-coded',
+      caption: 'Before: vibe-coded',
     },
     {
-      src: '/projects/1-token-bridge/meridian-aligned.png',
+      src: '/projects/1-token-bridge/meridian-aligned.jpg',
       alt: 'Meridian sign-in screen aligned to olive library tokens after audit apply',
-      caption: 'After — audit apply',
+      caption: 'After: audit apply',
     },
   ]}
 />

@@ -18,9 +18,9 @@ const surfaces = [
 ];
 
 const inkScale = [
-  { name: 'ink', class: 'text-ink', role: 'Primary — headings & emphasis' },
-  { name: 'ink-muted', class: 'text-ink-muted', role: 'Secondary — body & lead' },
-  { name: 'ink-subtle', class: 'text-ink-subtle', role: 'Tertiary — meta & eyebrows' },
+  { name: 'ink', class: 'text-ink', role: 'Primary: headings & emphasis' },
+  { name: 'ink-muted', class: 'text-ink-muted', role: 'Secondary: body & lead' },
+  { name: 'ink-subtle', class: 'text-ink-subtle', role: 'Tertiary: meta & eyebrows' },
 ];
 
 const lines = [
@@ -192,7 +192,7 @@ const radii = [
           </div>
           <div>
             <p class="text-lg leading-relaxed text-ink-muted sm:text-xl">
-              Lead body — role line, hero support, and other secondary sentences.
+              Lead body: role line, hero support, and other secondary sentences.
             </p>
             <p class="mt-2 font-mono text-xs text-ink-subtle">
               text-lg sm:text-xl leading-relaxed text-ink-muted
@@ -402,12 +402,14 @@ const radii = [
           class="mt-3"
           items={[
             {
-              src: '/projects/1-token-bridge/paper-library.png',
+              src: '/projects/1-token-bridge/paper-library.jpg',
               alt: 'Paper library token artboards example',
+              caption: 'Paper: design tool, code as SOT',
             },
             {
-              src: '/projects/1-token-bridge/design-md-editor.png',
+              src: '/projects/1-token-bridge/design-md-editor.jpg',
               alt: 'DESIGN.md editor with YAML frontmatter example',
+              caption: 'DESIGN.md structure',
             },
           ]}
         />
@@ -418,18 +420,19 @@ const radii = [
           spans={[6, 3, 3]}
           items={[
             {
-              src: '/projects/1-token-bridge/guinea-audit.png',
+              src: '/projects/1-token-bridge/guinea-audit.jpg',
               alt: 'Token audit triage UI example',
+              caption: 'Audit triage',
             },
             {
-              src: '/projects/1-token-bridge/meridian-drift.png',
+              src: '/projects/1-token-bridge/meridian-drift.jpg',
               alt: 'Login screen with token drift example',
-              caption: 'Before — vibe-coded',
+              caption: 'Before: vibe-coded',
             },
             {
-              src: '/projects/1-token-bridge/meridian-aligned.png',
+              src: '/projects/1-token-bridge/meridian-aligned.jpg',
               alt: 'Login screen aligned to library tokens example',
-              caption: 'After — audit apply',
+              caption: 'After: audit apply',
             },
           ]}
         />
@@ -448,8 +451,8 @@ const radii = [
         <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink-muted">
           This page (and every section above) is wrapped in
           <code class="code-inline">Container</code>
-          — <code class="code-inline">max-w-content</code> + horizontal
-          <code class="code-inline">px-6</code>.
+          (<code class="code-inline">max-w-content</code> + horizontal
+          <code class="code-inline">px-6</code>).
         </p>
         <div
           class="mt-10 rounded-card border border-dashed border-line-strong bg-canvas-elevated/30 px-6 py-10"
