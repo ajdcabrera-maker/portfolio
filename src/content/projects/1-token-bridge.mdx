@@ -1,0 +1,41 @@
+---
+title: "AI Token Governance & Vibe-Code Audit Engine"
+subtitle: "Eliminating AI UI drift using DESIGN.md contracts, Paper MCP visual sandboxing, and human-in-the-loop agentic triage."
+role: "Product Architect & Systems Lead"
+timeline: "2026"
+metrics: ["0 Token Drift", "Human-in-the-Loop Triage"]
+stack: ["DESIGN.md", "Paper MCP", "Cursor", "React", "Node.js"]
+order: 1
+---
+
+## Executive Summary
+
+Rapid development with LLM agents like Cursor enables incredible feature velocity, but it introduces severe **vibe-coding drift**: hardcoded hex values, broken slot contracts, and unmaintainable component overrides. 
+
+This project establishes a three-tier governance architecture using `DESIGN.md` as the machine-readable Single Source of Truth (SOT), Paper.design over local Model Context Protocol (MCP) as a visual sandbox, and a human-in-the-loop triage UI to audit and align production code.
+
+---
+
+## The System Architecture
+
+The architecture enforces a strict contract between visual design, machine-readable specifications, and production code:
+
+* **Paper.design**: Visual Soft-Lock & MCP Integration (`127.0.0.1:29979/mcp`)
+* **DESIGN.md**: YAML Frontmatter SOT + Prose Contracts
+* **src/ds/**: Production React Contract UI (`tokens.css` + Components)
+
+### Read Order & Governance Rules
+1. **`audit.md`**: Playbook defining triage actions and governance rules.
+2. **`DESIGN.md`**: The SOT containing machine-readable YAML frontmatter tokens and prose component contracts.
+3. **`src/ds/*`**: The React implementation of the token contracts.
+4. **The Defect Rule**: If product code, Paper soft-lock, and `DESIGN.md` disagree, it is treated as a structural defect. Fix Paper, log `design.changelog.md`, update `DESIGN.md`, and align `src/ds` in a single atomic commit.
+
+---
+
+## Agentic Triage Engine
+
+Instead of relying on passive visual regression, the `/audit` interface presents structured findings for human-in-the-loop review:
+
+* **Adjust (Immediate):** Executes `scripts/apply-audit.mjs` to update product UI to standard tokens instantly.
+* **Extend (Queued):** Writes `audit-pending.json` and queues new component requests into Paper.design via local MCP.
+* **Exception / Skip:** Explicitly logs rationale for non-standard UI overrides.

@@ -1,0 +1,208 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+
+const calUrl = 'https://cal.com/aaron-cabrera-27ln1w';
+
+const principles = [
+  {
+    number: '01',
+    title: 'Code-Grounded Design',
+    description:
+      'Interfaces designed with system constraints, DOM structure, and token governance in mind — so design intent survives handoff and implementation.',
+  },
+  {
+    number: '02',
+    title: 'Data & Usability First',
+    description:
+      'Grounding decisions in usability testing, conversion metrics, and real-world impact rather than preference alone.',
+  },
+  {
+    number: '03',
+    title: 'Agentic Workflows',
+    description:
+      'Treating LLMs and design tools as collaborative systems built on single sources of truth — contracts, reviews, and automated alignment.',
+  },
+];
+
+const toolkit = [
+  {
+    title: 'Design & Systems',
+    items: [
+      'Figma',
+      'Storybook',
+      'Zeroheight',
+      'Paper.design',
+      'Hotjar',
+      'Miro',
+    ],
+  },
+  {
+    title: 'AI & Code',
+    items: [
+      '.design.md',
+      'Paper MCP',
+      'Cursor',
+      'HTML5',
+      'CSS3',
+      'JavaScript',
+      'PHP',
+      'MySQL',
+      'React',
+      'Tailwind',
+    ],
+  },
+  {
+    title: 'Operations',
+    items: ['Jira', 'Azure DevOps', 'Asana', 'Trello'],
+  },
+];
+---
+
+<SiteLayout
+  title="About — Aaron Cabrera"
+  description="Designing at the intersection of systems, code, and AI — from enterprise UX leadership to AI-native design ops."
+>
+  <main>
+    <!-- Story -->
+    <section class="border-b border-neutral-900">
+      <div class="mx-auto max-w-6xl px-6 pb-16 pt-16 sm:pb-24 sm:pt-24">
+        <p
+          class="text-sm font-medium uppercase tracking-[0.14em] text-neutral-500"
+        >
+          About
+        </p>
+        <h1
+          class="mt-4 max-w-3xl text-3xl font-semibold tracking-tight text-neutral-50 sm:text-5xl sm:leading-[1.1]"
+        >
+          Designing at the Intersection of Systems, Code, and AI.
+        </h1>
+
+        <div
+          class="mt-10 max-w-2xl space-y-6 text-base leading-relaxed text-neutral-400 sm:text-lg"
+        >
+          <p>
+            I’m a BS Information Technology graduate with a web development
+            foundation (2015–2018) who transitioned into end-to-end UX/UI
+            leadership — bringing technical fluency into every design decision.
+          </p>
+          <p>
+            I’ve managed high-volume consumer platforms at Cebu Pacific Air,
+            driving
+            <span class="text-neutral-200">+15% CSAT</span>
+            and
+            <span class="text-neutral-200">+3% conversion</span>, and now design
+            enterprise internal software at Partners Group — translating complex
+            domain logic into clear, multi-role workflows.
+          </p>
+          <p>
+            My current focus is pioneering AI-native workflows using
+            <code
+              class="rounded-md border border-neutral-800 bg-neutral-900 px-1.5 py-0.5 font-mono text-[0.9em] text-emerald-300"
+              >.design.md</code
+            >, Paper MCP, and Cursor to bridge design ops with automated
+            engineering — keeping generated UI aligned to contracts and human
+            review.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Principles -->
+    <section class="border-b border-neutral-900">
+      <div class="mx-auto max-w-6xl px-6 py-16 sm:py-24">
+        <p
+          class="text-sm font-medium uppercase tracking-[0.14em] text-neutral-500"
+        >
+          Operating philosophy
+        </p>
+        <h2
+          class="mt-3 text-2xl font-semibold tracking-tight text-neutral-50 sm:text-3xl"
+        >
+          Principles
+        </h2>
+
+        <div class="mt-12 grid gap-4 lg:grid-cols-3">
+          {
+            principles.map((principle) => (
+              <article class="rounded-2xl border border-neutral-800 bg-neutral-900/50 p-6 transition-colors hover:border-neutral-700 sm:p-7">
+                <p class="font-mono text-xs text-emerald-400/80">
+                  {principle.number}
+                </p>
+                <h3 class="mt-4 text-lg font-semibold tracking-tight text-neutral-50">
+                  {principle.title}
+                </h3>
+                <p class="mt-3 text-sm leading-relaxed text-neutral-400">
+                  {principle.description}
+                </p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- Toolkit -->
+    <section class="border-b border-neutral-900">
+      <div class="mx-auto max-w-6xl px-6 py-16 sm:py-24">
+        <p
+          class="text-sm font-medium uppercase tracking-[0.14em] text-neutral-500"
+        >
+          Tools
+        </p>
+        <h2
+          class="mt-3 text-2xl font-semibold tracking-tight text-neutral-50 sm:text-3xl"
+        >
+          Toolkit
+        </h2>
+
+        <div class="mt-12 grid gap-4 lg:grid-cols-3">
+          {
+            toolkit.map((group) => (
+              <div class="rounded-2xl border border-neutral-800 bg-neutral-950 p-6 sm:p-7">
+                <h3 class="text-sm font-medium text-neutral-200">
+                  {group.title}
+                </h3>
+                <ul class="mt-5 flex flex-wrap gap-2">
+                  {group.items.map((item) => (
+                    <li class="rounded-full border border-neutral-800 bg-neutral-900/60 px-2.5 py-1 text-xs text-neutral-400">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section>
+      <div class="mx-auto max-w-6xl px-6 py-16 sm:py-24">
+        <div
+          class="rounded-2xl border border-neutral-800 bg-neutral-900/50 px-6 py-10 sm:flex sm:items-center sm:justify-between sm:px-10"
+        >
+          <div>
+            <h2
+              class="text-xl font-semibold tracking-tight text-neutral-50 sm:text-2xl"
+            >
+              Let’s connect
+            </h2>
+            <p class="mt-2 text-sm text-neutral-400">
+              Open to conversations about AI-native design systems, Design Ops,
+              and product collaboration.
+            </p>
+          </div>
+          <a
+            href={calUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="mt-6 inline-flex rounded-full border border-neutral-100 bg-neutral-100 px-5 py-2.5 text-sm font-medium text-neutral-950 transition-colors hover:bg-white sm:mt-0"
+          >
+            Book a call
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+</SiteLayout>

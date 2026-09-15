@@ -1,0 +1,45 @@
+---
+const calUrl = 'https://cal.com/aaron-cabrera-27ln1w';
+const year = new Date().getFullYear();
+const links = [
+  { href: '/projects', label: 'Projects' },
+  { href: '/about', label: 'About' },
+  { href: '/resume', label: 'Resume' },
+];
+---
+
+<footer class="border-t border-neutral-800">
+  <div
+    class="mx-auto flex max-w-6xl flex-col gap-8 px-6 py-12 sm:flex-row sm:items-end sm:justify-between"
+  >
+    <div class="space-y-3">
+      <p class="text-sm font-medium text-neutral-100">Aaron Cabrera</p>
+      <p class="max-w-sm text-sm leading-relaxed text-neutral-500">
+        AI systems & product design — Design Ops, token governance, and code
+        automation.
+      </p>
+      <p class="text-xs text-neutral-600">© {year} Aaron Cabrera</p>
+    </div>
+
+    <div class="flex flex-wrap items-center gap-4 text-sm">
+      {
+        links.map((link) => (
+          <a
+            href={link.href}
+            class="text-neutral-400 transition-colors hover:text-neutral-100"
+          >
+            {link.label}
+          </a>
+        ))
+      }
+      <a
+        href={calUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-neutral-100 transition-colors hover:text-white"
+      >
+        Book a call →
+      </a>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,73 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@layer base {
+  html {
+    @apply bg-neutral-950 text-neutral-100 antialiased;
+  }
+}
+
+/* Dark technical prose overrides for case-study MDX */
+@layer components {
+  .case-study-prose {
+    @apply prose prose-invert max-w-none
+      prose-headings:scroll-mt-24 prose-headings:font-semibold prose-headings:tracking-tight
+      prose-h2:mt-14 prose-h2:mb-4 prose-h2:text-2xl prose-h2:text-neutral-50
+      prose-h3:mt-10 prose-h3:mb-3 prose-h3:text-xl prose-h3:text-neutral-100
+      prose-p:text-neutral-300 prose-p:leading-relaxed
+      prose-strong:text-neutral-100 prose-strong:font-semibold
+      prose-a:text-neutral-100 prose-a:underline prose-a:decoration-neutral-600
+      prose-a:underline-offset-4 hover:prose-a:decoration-neutral-300
+      prose-li:text-neutral-300 prose-li:marker:text-neutral-500
+      prose-hr:border-neutral-800;
+  }
+
+  .case-study-prose :where(code):not(:where(pre *)) {
+    @apply rounded-md border border-neutral-800 bg-neutral-900 px-1.5 py-0.5
+      font-mono text-[0.875em] font-normal text-emerald-300
+      before:content-none after:content-none;
+  }
+
+  .case-study-prose pre {
+    @apply overflow-x-auto rounded-xl border border-neutral-800 bg-neutral-900
+      p-4 text-sm leading-relaxed text-neutral-200 shadow-none;
+  }
+
+  .case-study-prose pre code {
+    @apply border-0 bg-transparent p-0 text-inherit;
+  }
+
+  .case-study-prose blockquote {
+    @apply border-l-2 border-emerald-500/70 bg-neutral-900/60 py-1 pl-5 pr-4
+      not-italic text-neutral-300;
+  }
+
+  .case-study-prose blockquote p {
+    @apply text-neutral-300;
+  }
+
+  .case-study-prose table {
+    @apply w-full border-collapse overflow-hidden rounded-xl
+      border border-neutral-800 text-sm;
+  }
+
+  .case-study-prose thead {
+    @apply bg-neutral-900 text-left text-neutral-200;
+  }
+
+  .case-study-prose th {
+    @apply border-b border-neutral-800 px-4 py-3 font-medium;
+  }
+
+  .case-study-prose td {
+    @apply border-b border-neutral-800/80 px-4 py-3 text-neutral-300;
+  }
+
+  .case-study-prose tbody tr:last-child td {
+    @apply border-b-0;
+  }
+
+  .case-study-prose tbody tr:hover {
+    @apply bg-neutral-900/40;
+  }
+}

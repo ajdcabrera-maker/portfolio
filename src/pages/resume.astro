@@ -1,0 +1,165 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+
+const cvUrl = '/Aaron-Cabrera-CV.pdf';
+
+const experience = [
+  {
+    role: 'Senior UX/UI Designer',
+    company: 'Partners Group',
+    period: 'March 2026 – Present',
+    highlights: [
+      'Designing enterprise internal workflow software and operational tools.',
+    ],
+  },
+  {
+    role: 'Management Consultant',
+    company: 'Accenture Song',
+    period: 'Nov 2025 – March 2026',
+    highlights: [
+      'Led end-to-end UX/interaction design work across strategy, technology, and data teams.',
+    ],
+  },
+  {
+    role: 'Usability and Design Manager',
+    company: 'Cebu Pacific Air',
+    period: 'Sept 2022 – Oct 2025',
+    highlights: [
+      'Spearheaded UX/UI across web, mobile, and chatbot platforms.',
+      'Boosted CSAT by 15% and conversion by 3%.',
+      'Established Figma to Storybook/Zeroheight design ops.',
+    ],
+  },
+  {
+    role: 'UI/UX Lead',
+    company: 'Makatisoft, Inc.',
+    period: 'Nov 2018 – Aug 2022',
+    highlights: [
+      'Owned design direction for crypto wallet (Swapoo) and mental healthcare/learning platforms.',
+    ],
+  },
+  {
+    role: 'Web Designer & Developer',
+    company: 'Strategic Marketing & Exhibitions, Dubai',
+    period: 'Aug 2015 – Nov 2018',
+    highlights: [
+      'Sole designer/developer building end-to-end event websites using HTML, CSS, JS, PHP, MySQL.',
+    ],
+  },
+];
+
+const education = {
+  degree: 'BS Information Technology',
+  school: 'Jose Rizal University',
+  period: '2011 – 2015',
+};
+---
+
+<SiteLayout
+  title="Resume — Aaron Cabrera"
+  description="Experience timeline spanning enterprise UX, aviation platforms, product design leadership, and full-stack web development."
+>
+  <main>
+    <!-- Header & download -->
+    <section class="border-b border-neutral-900">
+      <div
+        class="mx-auto flex max-w-6xl flex-col gap-8 px-6 pb-12 pt-16 sm:flex-row sm:items-end sm:justify-between sm:pb-16 sm:pt-24"
+      >
+        <div>
+          <p
+            class="text-sm font-medium uppercase tracking-[0.14em] text-neutral-500"
+          >
+            CV
+          </p>
+          <h1
+            class="mt-4 text-3xl font-semibold tracking-tight text-neutral-50 sm:text-5xl"
+          >
+            Resume / Experience
+          </h1>
+          <p class="mt-4 max-w-xl text-base leading-relaxed text-neutral-400">
+            A scannable overview of roles across AI-native systems, enterprise
+            workflows, aviation platforms, and product design leadership.
+          </p>
+        </div>
+
+        <a
+          href={cvUrl}
+          download
+          class="inline-flex shrink-0 items-center justify-center rounded-full border border-neutral-100 bg-neutral-100 px-5 py-2.5 text-sm font-medium text-neutral-950 transition-colors hover:bg-white"
+        >
+          Download PDF CV
+        </a>
+      </div>
+    </section>
+
+    <!-- Experience timeline -->
+    <section class="border-b border-neutral-900">
+      <div class="mx-auto max-w-6xl px-6 py-16 sm:py-20">
+        <h2
+          class="text-sm font-medium uppercase tracking-[0.14em] text-neutral-500"
+        >
+          Experience
+        </h2>
+
+        <ol class="relative mt-10 space-y-0 border-l border-neutral-800 ml-2 sm:ml-3">
+          {
+            experience.map((job) => (
+              <li class="relative pb-12 pl-8 last:pb-0 sm:pl-10">
+                <span
+                  class="absolute -left-[5px] top-1.5 size-2.5 rounded-full border border-neutral-600 bg-neutral-950"
+                  aria-hidden="true"
+                />
+
+                <div class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+                  <div>
+                    <h3 class="text-lg font-semibold tracking-tight text-neutral-50">
+                      {job.role}
+                    </h3>
+                    <p class="mt-1 text-sm text-neutral-300">{job.company}</p>
+                  </div>
+                  <time class="shrink-0 font-mono text-xs text-neutral-500 sm:text-right">
+                    {job.period}
+                  </time>
+                </div>
+
+                <ul class="mt-4 space-y-2">
+                  {job.highlights.map((item) => (
+                    <li class="flex gap-3 text-sm leading-relaxed text-neutral-400">
+                      <span class="mt-2 size-1 shrink-0 rounded-full bg-neutral-600" aria-hidden="true" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section>
+      <div class="mx-auto max-w-6xl px-6 py-16 sm:py-20">
+        <h2
+          class="text-sm font-medium uppercase tracking-[0.14em] text-neutral-500"
+        >
+          Education
+        </h2>
+
+        <div
+          class="mt-10 rounded-2xl border border-neutral-800 bg-neutral-900/50 p-6 sm:flex sm:items-baseline sm:justify-between sm:p-7"
+        >
+          <div>
+            <h3 class="text-lg font-semibold tracking-tight text-neutral-50">
+              {education.degree}
+            </h3>
+            <p class="mt-1 text-sm text-neutral-300">{education.school}</p>
+          </div>
+          <time class="mt-3 block font-mono text-xs text-neutral-500 sm:mt-0">
+            {education.period}
+          </time>
+        </div>
+      </div>
+    </section>
+  </main>
+</SiteLayout>
