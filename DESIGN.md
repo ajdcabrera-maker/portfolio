@@ -70,7 +70,7 @@ Defined in `src/styles/tokens.css` via Tailwind v4 `@theme`. Prefer semantic uti
 | `Pill` | `Pill.astro` | Stack / toolkit tags (`default` \| `quiet`) |
 | `MetricBadge` | `MetricBadge.astro` | High-contrast metrics |
 | `Surface` | `Surface.astro` | Bordered cards / CTA strips (`interactive` for hover) |
-| `Media` | `Media.astro` | Screenshots on `Grid`/`Col`; optional `spans` (e.g. `[6, 3, 3]`) |
+| `Media` | `Media.astro` | Screenshots on `Grid`/`Col`; optional `spans` / `caption`; click-to-enlarge lightbox |
 
 ### Site chrome (composed, not duplicated)
 
@@ -105,7 +105,7 @@ Defined in `src/styles/tokens.css` via Tailwind v4 `@theme`. Prefer semantic uti
   - Mobile: single column (`grid-cols-1`).
   - `sm+`: 12 tracks. Spans: **12** full, **6** half, **4** third, **3** quarter (also **6+3+3** feature rows).
   - Gap: `gap-grid` token (owned by `Grid`).
-  - Media frame height: `h-media` / `sm:h-media-lg` so cells in a row stay equal height.
+  - Media frames: `h-media` / `sm:h-media-lg`, `object-contain` (no hard crop); optional `caption`; click opens lightbox for full screenshot.
 - **Section rhythm:** `border-b border-line` between major bands; vertical padding `py-16`–`py-24` (or `py-20 sm:py-24` on home).
 - **Breakpoints:** mobile-first; collapse nav below `md`; 12-col activates at `sm`.
 - **Case studies:** prose via `.case-study-prose` in `global.css`; screenshots via `Media` (built on `Grid`/`Col`).

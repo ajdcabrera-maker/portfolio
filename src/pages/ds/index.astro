@@ -394,7 +394,7 @@ const radii = [
           Media
         </h2>
         <p class="mt-3 font-mono text-xs text-ink-subtle">
-          Media.astro · Grid/Col · h-media · optional spans
+          Media.astro · captions · click to enlarge
         </p>
 
         <p class="mt-10 text-xs text-ink-subtle">2-up · span 6 / 6</p>
@@ -412,7 +412,7 @@ const radii = [
           ]}
         />
 
-        <p class="mt-10 text-xs text-ink-subtle">3-up feature · span 6 / 3 / 3</p>
+        <p class="mt-10 text-xs text-ink-subtle">3-up feature · span 6 / 3 / 3 · Before / After</p>
         <Media
           class="mt-3"
           spans={[6, 3, 3]}
@@ -424,10 +424,12 @@ const radii = [
             {
               src: '/projects/1-token-bridge/meridian-drift.png',
               alt: 'Login screen with token drift example',
+              caption: 'Before — vibe-coded',
             },
             {
               src: '/projects/1-token-bridge/meridian-aligned.png',
               alt: 'Login screen aligned to library tokens example',
+              caption: 'After — audit apply',
             },
           ]}
         />

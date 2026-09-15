@@ -2,6 +2,7 @@
 /**
  * Case-study screenshot gallery on the shared 12-col grid.
  * Default spans: 1→12, 2→6, 3→4. Pass `spans` for custom rows (e.g. 6/3/3).
+ * Optional `caption` under each frame. Click opens a full-size lightbox.
  */
 import Grid from './Grid.astro';
 import Col from './Col.astro';
@@ -9,6 +10,8 @@ import Col from './Col.astro';
 export interface MediaItem {
   src: string;
   alt: string;
+  /** Quiet label under the frame (e.g. Before / After). */
+  caption?: string;
 }
 
 type ColSpan = 3 | 4 | 6 | 12;
@@ -36,33 +39,151 @@ const defaultSpanByCount: Record<number, ColSpan> = {
 
 const spans: ColSpan[] =
   spanProp ??
-  visible.map(
-    () => defaultSpanByCount[visible.length] ?? 12,
-  );
+  visible.map(() => defaultSpanByCount[visible.length] ?? 12);
 
 if (spanProp && spanProp.length !== items.length) {
   throw new Error('Media `spans` length must match `items` length.');
 }
 ---
 
-<Grid
-  as="figure"
-  class:list={['not-prose my-10 items-stretch', className]}
-  role="group"
->
-  {
-    visible.map((item, index) => (
-      <Col span={spans[index] ?? 12}>
-        <div class="h-media overflow-hidden rounded-card bg-canvas-elevated sm:h-media-lg">
-          <img
-            src={item.src}
-            alt={item.alt}
-            loading="lazy"
-            decoding="async"
-            class="size-full object-cover object-top"
-          />
-        </div>
-      </Col>
-    ))
+<div data-media-root class:list={['not-prose my-10', className]}>
+  <Grid as="div" class="items-start" role="group">
+    {
+      visible.map((item, index) => (
+        <Col span={spans[index] ?? 12}>
+          <figure class="m-0 flex flex-col gap-2">
+            <button
+              type="button"
+              data-media-trigger
+              data-src={item.src}
+              data-alt={item.alt}
+              data-caption={item.caption ?? ''}
+              class="group relative block w-full cursor-zoom-in overflow-hidden rounded-card border border-line bg-canvas-elevated text-left transition-colors hover:border-line-strong focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/40"
+              aria-label={`Enlarge: ${item.alt}`}
+            >
+              <span class="flex h-media items-start justify-center p-3 sm:h-media-lg sm:p-4">
+                <img
+                  src={item.src}
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                  class="max-h-full max-w-full object-contain object-top"
+                />
+              </span>
+              <span
+                class="pointer-events-none absolute bottom-2 right-2 font-mono text-[10px] uppercase tracking-wider text-ink-subtle opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100"
+              >
+                Expand
+              </span>
+            </button>
+            {
+              item.caption ? (
+                <figcaption class="font-mono text-xs text-ink-subtle">
+                  {item.caption}
+                </figcaption>
+              ) : null
+            }
+          </figure>
+        </Col>
+      ))
+    }
+  </Grid>
+
+  {/*
+    Do not put bare `flex` / `block` on <dialog> — it overrides the UA
+    `dialog:not([open]) { display: none }` and leaves an empty overlay up.
+  */}
+  <dialog
+    data-media-dialog
+    class="fixed inset-0 z-50 m-0 h-full max-h-none w-full max-w-none bg-canvas/90 p-4 open:flex open:items-center open:justify-center sm:p-8"
+  >
+    <div
+      class="relative flex max-h-full w-full max-w-content flex-col items-center gap-3"
+      data-media-panel
+    >
+      <button
+        type="button"
+        data-media-close
+        class="self-end rounded-control border border-line bg-canvas-elevated px-2.5 py-1 font-mono text-xs text-ink-muted transition-colors hover:border-line-strong hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/40"
+      >
+        Close
+      </button>
+      <img
+        data-media-full
+        alt=""
+        class="max-h-[85vh] w-auto max-w-full rounded-card border border-line object-contain"
+      />
+      <p
+        data-media-dialog-caption
+        class="hidden font-mono text-xs text-ink-subtle"
+      ></p>
+    </div>
+  </dialog>
+</div>
+
+<style>
+  dialog[data-media-dialog]:not([open]) {
+    display: none;
   }
-</Grid>
+
+  dialog[data-media-dialog]::backdrop {
+    background: transparent;
+  }
+</style>
+
+<script>
+  function bindMediaLightbox(root: HTMLElement) {
+    if (root.dataset.mediaReady === '1') return;
+    root.dataset.mediaReady = '1';
+
+    const dialog = root.querySelector<HTMLDialogElement>('[data-media-dialog]');
+    const full = root.querySelector<HTMLImageElement>('[data-media-full]');
+    const captionEl = root.querySelector<HTMLElement>(
+      '[data-media-dialog-caption]',
+    );
+    const panel = root.querySelector<HTMLElement>('[data-media-panel]');
+    if (!dialog || !full || !captionEl) return;
+
+    const open = (trigger: HTMLElement) => {
+      const src = trigger.dataset.src;
+      if (!src) return;
+      full.src = src;
+      full.alt = trigger.dataset.alt ?? '';
+      const caption = trigger.dataset.caption?.trim() ?? '';
+      if (caption) {
+        captionEl.textContent = caption;
+        captionEl.classList.remove('hidden');
+      } else {
+        captionEl.textContent = '';
+        captionEl.classList.add('hidden');
+      }
+      dialog.showModal();
+    };
+
+    root.querySelectorAll<HTMLElement>('[data-media-trigger]').forEach((btn) => {
+      btn.addEventListener('click', () => open(btn));
+    });
+
+    root.querySelectorAll('[data-media-close]').forEach((btn) => {
+      btn.addEventListener('click', () => dialog.close());
+    });
+
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+
+    dialog.addEventListener('close', () => {
+      full.removeAttribute('src');
+      full.alt = '';
+    });
+  }
+
+  function initAll() {
+    document
+      .querySelectorAll<HTMLElement>('[data-media-root]')
+      .forEach(bindMediaLightbox);
+  }
+
+  initAll();
+  document.addEventListener('astro:page-load', initAll);
+</script>
