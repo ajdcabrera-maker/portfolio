@@ -1,0 +1,68 @@
+---
+/**
+ * Case-study screenshot gallery on the shared 12-col grid.
+ * Default spans: 1→12, 2→6, 3→4. Pass `spans` for custom rows (e.g. 6/3/3).
+ */
+import Grid from './Grid.astro';
+import Col from './Col.astro';
+
+export interface MediaItem {
+  src: string;
+  alt: string;
+}
+
+type ColSpan = 3 | 4 | 6 | 12;
+
+interface Props {
+  items: MediaItem[];
+  /** Per-item Col spans (must match items length). */
+  spans?: ColSpan[];
+  class?: string;
+}
+
+const { items, spans: spanProp, class: className } = Astro.props;
+
+if (!items?.length) {
+  throw new Error('Media requires at least one item.');
+}
+
+const visible = items.slice(0, 3);
+
+const defaultSpanByCount: Record<number, ColSpan> = {
+  1: 12,
+  2: 6,
+  3: 4,
+};
+
+const spans: ColSpan[] =
+  spanProp ??
+  visible.map(
+    () => defaultSpanByCount[visible.length] ?? 12,
+  );
+
+if (spanProp && spanProp.length !== items.length) {
+  throw new Error('Media `spans` length must match `items` length.');
+}
+---
+
+<Grid
+  as="figure"
+  class:list={['not-prose my-10 items-stretch', className]}
+  role="group"
+>
+  {
+    visible.map((item, index) => (
+      <Col span={spans[index] ?? 12}>
+        <div class="h-media overflow-hidden rounded-card bg-canvas-elevated sm:h-media-lg">
+          <img
+            src={item.src}
+            alt={item.alt}
+            loading="lazy"
+            decoding="async"
+            class="size-full object-cover object-top"
+          />
+        </div>
+      </Col>
+    ))
+  }
+</Grid>

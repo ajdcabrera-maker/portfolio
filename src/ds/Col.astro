@@ -1,0 +1,24 @@
+---
+/**
+ * 12-column cell. Full width below `sm`; spans the 12-col grid from `sm` up.
+ * Use 12 (full), 6 (2-up), 4 (3-up), 3 (4-up).
+ */
+interface Props {
+  span?: 3 | 4 | 6 | 12;
+  class?: string;
+  as?: 'div' | 'li' | 'article' | 'section';
+}
+
+const { span = 12, class: className, as: Tag = 'div' } = Astro.props;
+
+const spans: Record<3 | 4 | 6 | 12, string> = {
+  12: 'sm:col-span-12',
+  6: 'sm:col-span-6',
+  4: 'sm:col-span-4',
+  3: 'sm:col-span-3',
+};
+---
+
+<Tag class:list={['col-span-1', spans[span], className]}>
+  <slot />
+</Tag>

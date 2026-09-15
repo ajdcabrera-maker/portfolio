@@ -46,6 +46,9 @@ Defined in `src/styles/tokens.css` via Tailwind v4 `@theme`. Prefer semantic uti
 | Card radius | `card` | `rounded-card` | `1rem` |
 | Pill radius | `pill` | `rounded-pill` | `9999px` |
 | Content width | `content` | `max-w-content` | `72rem` |
+| Grid gap | `grid` | `gap-grid` | `1rem` |
+| Media frame height | `media` | `h-media` | `18rem` |
+| Media frame height (sm+) | `media-lg` | `sm:h-media-lg` | `20rem` |
 
 ### Rules
 - **Do not** introduce new hex values in pages. Extend `tokens.css` + this table first.
@@ -60,11 +63,14 @@ Defined in `src/styles/tokens.css` via Tailwind v4 `@theme`. Prefer semantic uti
 | Primitive | File | Use |
 |-----------|------|-----|
 | `Container` | `Container.astro` | Page section width + `px-6` |
+| `Grid` | `Grid.astro` | 12-column row (`grid-cols-1` → `sm:grid-cols-12`, `gap-grid`) |
+| `Col` | `Col.astro` | Column span: `12` full · `6` half · `4` third · `3` quarter |
 | `Eyebrow` | `Eyebrow.astro` | Uppercase section/page labels |
 | `Button` | `Button.astro` | `primary` / `ghost`; sizes `sm` (default) / `md`; supports `external`, `download` |
 | `Pill` | `Pill.astro` | Stack / toolkit tags (`default` \| `quiet`) |
 | `MetricBadge` | `MetricBadge.astro` | High-contrast metrics |
 | `Surface` | `Surface.astro` | Bordered cards / CTA strips (`interactive` for hover) |
+| `Media` | `Media.astro` | Screenshots on `Grid`/`Col`; optional `spans` (e.g. `[6, 3, 3]`) |
 
 ### Site chrome (composed, not duplicated)
 
@@ -95,10 +101,14 @@ Defined in `src/styles/tokens.css` via Tailwind v4 `@theme`. Prefer semantic uti
 
 ## Layout patterns
 
+- **12-column grid:** All multi-column layouts use `Grid` + `Col` — not ad-hoc `grid-cols-2` / `grid-cols-3`.
+  - Mobile: single column (`grid-cols-1`).
+  - `sm+`: 12 tracks. Spans: **12** full, **6** half, **4** third, **3** quarter (also **6+3+3** feature rows).
+  - Gap: `gap-grid` token (owned by `Grid`).
+  - Media frame height: `h-media` / `sm:h-media-lg` so cells in a row stay equal height.
 - **Section rhythm:** `border-b border-line` between major bands; vertical padding `py-16`–`py-24` (or `py-20 sm:py-24` on home).
-- **Grids:** projects `sm:grid-cols-2`; expertise/principles `lg:grid-cols-3`; gap `gap-4`.
-- **Breakpoints:** mobile-first; collapse nav below `md`; grids at `sm` / `lg`.
-- **Case studies:** prose via `.case-study-prose` in `global.css` — do not restyle MDX ad hoc per page.
+- **Breakpoints:** mobile-first; collapse nav below `md`; 12-col activates at `sm`.
+- **Case studies:** prose via `.case-study-prose` in `global.css`; screenshots via `Media` (built on `Grid`/`Col`).
 
 ---
 
@@ -109,7 +119,7 @@ Defined in `src/styles/tokens.css` via Tailwind v4 `@theme`. Prefer semantic uti
 | `/ds` | `src/pages/ds/index.astro` | Token + primitive gallery (not in primary nav) |
 | `/` | `src/pages/index.astro` | Hero: avatar + name H1 → lead body (role + support with `.code-inline`); Now meta; project cards + metrics |
 | `/projects` | `src/pages/projects/index.astro` | Surface cards + MetricBadge + Pill |
-| `/projects/[slug]` | `src/pages/projects/[slug].astro` | Case-study chrome + `.case-study-prose` |
+| `/projects/[slug]` | `src/pages/projects/[slug].astro` | Case-study chrome + `.case-study-prose` + optional `Media` |
 | `/about` | `src/pages/about.astro` | Principles + toolkit pills + CTA strip |
 | `/resume` | `src/pages/resume.astro` | Timeline + download CTA |
 

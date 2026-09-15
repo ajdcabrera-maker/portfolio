@@ -1,0 +1,20 @@
+---
+/**
+ * 12-column layout row. Mobile stacks to 1 column; `sm+` uses 12 tracks.
+ * Pair with `Col` for spans (12 / 6 / 4 / 3).
+ */
+interface Props {
+  class?: string;
+  as?: 'div' | 'section' | 'ul' | 'ol' | 'figure';
+  role?: string;
+}
+
+const { class: className, as: Tag = 'div', role } = Astro.props;
+---
+
+<Tag
+  class:list={['grid grid-cols-1 gap-grid sm:grid-cols-12', className]}
+  role={role}
+>
+  <slot />
+</Tag>

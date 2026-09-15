@@ -8,9 +8,11 @@ stack: ["DESIGN.md", "Paper MCP", "Cursor", "React", "Node"]
 order: 1
 ---
 
+import Media from '../../ds/Media.astro';
+
 ## Executive Summary
 
-Rapid development with LLM agents like Cursor enables incredible feature velocity, but it introduces severe **vibe-coding drift**: hardcoded hex values, broken slot contracts, and unmaintainable component overrides. 
+Rapid development with LLM agents like Cursor enables incredible feature velocity, but it introduces severe **vibe-coding drift**: hardcoded hex values, broken slot contracts, and unmaintainable component overrides.
 
 This project establishes a three-tier governance architecture using `DESIGN.md` as the machine-readable Single Source of Truth (SOT), Paper.design over local Model Context Protocol (MCP) as a visual sandbox, and a human-in-the-loop triage UI to audit and align production code.
 
@@ -24,11 +26,24 @@ The architecture enforces a strict contract between visual design, machine-reada
 * **DESIGN.md**: YAML Frontmatter SOT + Prose Contracts
 * **src/ds/**: Production React Contract UI (`tokens.css` + Components)
 
+<Media
+  items={[
+    {
+      src: '/projects/1-token-bridge/paper-library.png',
+      alt: 'Paper library artboards showing token swatches, color rules, spacing, and radius scales',
+    },
+    {
+      src: '/projects/1-token-bridge/design-md-editor.png',
+      alt: 'DESIGN.md open in an editor with YAML frontmatter token contracts',
+    },
+  ]}
+/>
+
 ### Read Order & Governance Rules
+
 1. **`audit.md`**: Playbook defining triage actions and governance rules.
 2. **`DESIGN.md`**: The SOT containing machine-readable YAML frontmatter tokens and prose component contracts.
 3. **`src/ds/*`**: The React implementation of the token contracts.
-4. **The Defect Rule**: If product code, Paper soft-lock, and `DESIGN.md` disagree, it is treated as a structural defect. Fix Paper, log `design.changelog.md`, update `DESIGN.md`, and align `src/ds` in a single atomic commit.
 
 ---
 
@@ -39,3 +54,21 @@ Instead of relying on passive visual regression, the `/audit` interface presents
 * **Adjust (Immediate):** Executes `scripts/apply-audit.mjs` to update product UI to standard tokens instantly.
 * **Extend (Queued):** Writes `audit-pending.json` and queues new component requests into Paper.design via local MCP.
 * **Exception / Skip:** Explicitly logs rationale for non-standard UI overrides.
+
+<Media
+  spans={[6, 3, 3]}
+  items={[
+    {
+      src: '/projects/1-token-bridge/guinea-audit.png',
+      alt: 'Guinea audit triage UI comparing local tokens against the library',
+    },
+    {
+      src: '/projects/1-token-bridge/meridian-drift.png',
+      alt: 'Meridian sign-in screen showing drifted blue and purple tokens',
+    },
+    {
+      src: '/projects/1-token-bridge/meridian-aligned.png',
+      alt: 'Meridian sign-in screen aligned to olive library tokens',
+    },
+  ]}
+/>

@@ -6,6 +6,9 @@ import Button from '../../ds/Button.astro';
 import Pill from '../../ds/Pill.astro';
 import MetricBadge from '../../ds/MetricBadge.astro';
 import Surface from '../../ds/Surface.astro';
+import Media from '../../ds/Media.astro';
+import Grid from '../../ds/Grid.astro';
+import Col from '../../ds/Col.astro';
 
 const surfaces = [
   { name: 'canvas', class: 'bg-canvas', hex: '#0a0a0a' },
@@ -271,6 +274,81 @@ const radii = [
       </Container>
     </section>
 
+    <!-- Grid / Col -->
+    <section class="border-b border-line">
+      <Container class="py-16 sm:py-20">
+        <Eyebrow>Layout</Eyebrow>
+        <h2
+          class="mt-3 text-2xl font-semibold tracking-tight text-ink sm:text-3xl"
+        >
+          Grid & Col
+        </h2>
+        <p class="mt-3 font-mono text-xs text-ink-subtle">
+          Grid.astro + Col.astro · 12-column · gap-grid · span 12 / 6 / 4 / 3
+        </p>
+        <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink-muted">
+          Shared layout contract for every multi-column composition. Prefer
+          these over ad-hoc <code class="code-inline">grid-cols-*</code>.
+        </p>
+
+        <p class="mt-10 text-xs text-ink-subtle">Col span 6 · 2-up</p>
+        <Grid class="mt-3">
+          <Col span={6}>
+            <div
+              class="rounded-card border border-line bg-canvas-elevated/50 px-4 py-6 text-center font-mono text-xs text-ink-subtle"
+            >
+              span 6
+            </div>
+          </Col>
+          <Col span={6}>
+            <div
+              class="rounded-card border border-line bg-canvas-elevated/50 px-4 py-6 text-center font-mono text-xs text-ink-subtle"
+            >
+              span 6
+            </div>
+          </Col>
+        </Grid>
+
+        <p class="mt-8 text-xs text-ink-subtle">Col span 4 · 3-up</p>
+        <Grid class="mt-3">
+          <Col span={4}>
+            <div
+              class="rounded-card border border-line bg-canvas-elevated/50 px-4 py-6 text-center font-mono text-xs text-ink-subtle"
+            >
+              span 4
+            </div>
+          </Col>
+          <Col span={4}>
+            <div
+              class="rounded-card border border-line bg-canvas-elevated/50 px-4 py-6 text-center font-mono text-xs text-ink-subtle"
+            >
+              span 4
+            </div>
+          </Col>
+          <Col span={4}>
+            <div
+              class="rounded-card border border-line bg-canvas-elevated/50 px-4 py-6 text-center font-mono text-xs text-ink-subtle"
+            >
+              span 4
+            </div>
+          </Col>
+        </Grid>
+
+        <p class="mt-8 text-xs text-ink-subtle">Col span 3 · 4-up</p>
+        <Grid class="mt-3">
+          {
+            [1, 2, 3, 4].map((n) => (
+              <Col span={3}>
+                <div class="rounded-card border border-line bg-canvas-elevated/50 px-4 py-6 text-center font-mono text-xs text-ink-subtle">
+                  span 3 · {n}
+                </div>
+              </Col>
+            ))
+          }
+        </Grid>
+      </Container>
+    </section>
+
     <!-- Surface -->
     <section class="border-b border-line">
       <Container class="py-16 sm:py-20">
@@ -281,24 +359,78 @@ const radii = [
           Surface
         </h2>
         <p class="mt-3 font-mono text-xs text-ink-subtle">Surface.astro</p>
-        <div class="mt-10 grid gap-4 sm:grid-cols-2">
-          <Surface class="bg-canvas-elevated/50 p-6">
-            <p class="text-sm font-medium text-ink">Static surface</p>
-            <p class="mt-2 text-sm text-ink-muted">
-              Default bordered card for principles, toolkit, education.
-            </p>
-          </Surface>
-          <Surface
-            href="#surface"
-            interactive
-            class="bg-canvas-elevated/40 p-6"
-          >
-            <p class="text-sm font-medium text-ink">Interactive surface</p>
-            <p class="mt-2 text-sm text-ink-muted">
-              Hover border + fill for project cards and adjacent nav.
-            </p>
-          </Surface>
-        </div>
+        <Grid class="mt-10">
+          <Col span={6}>
+            <Surface class="h-full bg-canvas-elevated/50 p-6">
+              <p class="text-sm font-medium text-ink">Static surface</p>
+              <p class="mt-2 text-sm text-ink-muted">
+                Default bordered card for principles, toolkit, education.
+              </p>
+            </Surface>
+          </Col>
+          <Col span={6}>
+            <Surface
+              href="#surface"
+              interactive
+              class="h-full bg-canvas-elevated/40 p-6"
+            >
+              <p class="text-sm font-medium text-ink">Interactive surface</p>
+              <p class="mt-2 text-sm text-ink-muted">
+                Hover border + fill for project cards and adjacent nav.
+              </p>
+            </Surface>
+          </Col>
+        </Grid>
+      </Container>
+    </section>
+
+    <!-- Media -->
+    <section class="border-b border-line">
+      <Container class="py-16 sm:py-20">
+        <Eyebrow>Primitive</Eyebrow>
+        <h2
+          class="mt-3 text-2xl font-semibold tracking-tight text-ink sm:text-3xl"
+        >
+          Media
+        </h2>
+        <p class="mt-3 font-mono text-xs text-ink-subtle">
+          Media.astro · Grid/Col · h-media · optional spans
+        </p>
+
+        <p class="mt-10 text-xs text-ink-subtle">2-up · span 6 / 6</p>
+        <Media
+          class="mt-3"
+          items={[
+            {
+              src: '/projects/1-token-bridge/paper-library.png',
+              alt: 'Paper library token artboards example',
+            },
+            {
+              src: '/projects/1-token-bridge/design-md-editor.png',
+              alt: 'DESIGN.md editor with YAML frontmatter example',
+            },
+          ]}
+        />
+
+        <p class="mt-10 text-xs text-ink-subtle">3-up feature · span 6 / 3 / 3</p>
+        <Media
+          class="mt-3"
+          spans={[6, 3, 3]}
+          items={[
+            {
+              src: '/projects/1-token-bridge/guinea-audit.png',
+              alt: 'Token audit triage UI example',
+            },
+            {
+              src: '/projects/1-token-bridge/meridian-drift.png',
+              alt: 'Login screen with token drift example',
+            },
+            {
+              src: '/projects/1-token-bridge/meridian-aligned.png',
+              alt: 'Login screen aligned to library tokens example',
+            },
+          ]}
+        />
       </Container>
     </section>
 

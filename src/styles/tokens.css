@@ -31,6 +31,9 @@
   --radius-card: 1rem;
   --radius-pill: 9999px;
 
-  /* Layout → max-w-content */
+  /* Layout → max-w-content | gap-grid | h-media */
   --max-width-content: 72rem;
+  --spacing-grid: 1rem;
+  --height-media: 18rem;
+  --height-media-lg: 20rem;
 }
