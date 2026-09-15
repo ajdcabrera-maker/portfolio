@@ -1,0 +1,33 @@
+---
+/**
+ * Bordered surface used for project cards, principle cards, CTA strips.
+ */
+interface Props {
+  class?: string;
+  as?: 'div' | 'article' | 'section' | 'a';
+  href?: string;
+  interactive?: boolean;
+}
+
+const {
+  class: className,
+  as,
+  href,
+  interactive = false,
+} = Astro.props;
+
+const Tag = as ?? (href ? 'a' : 'div');
+
+const base =
+  'rounded-card border border-line bg-canvas-elevated/50 transition-colors';
+const hover = interactive
+  ? 'hover:border-line-strong hover:bg-canvas-elevated'
+  : '';
+---
+
+<Tag
+  href={href}
+  class:list={[base, hover, className]}
+>
+  <slot />
+</Tag>

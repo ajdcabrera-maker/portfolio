@@ -1,0 +1,22 @@
+---
+/**
+ * Soft stack / toolkit tag.
+ */
+interface Props {
+  class?: string;
+  tone?: 'default' | 'quiet';
+}
+
+const { class: className, tone = 'default' } = Astro.props;
+
+const tones = {
+  default:
+    'rounded-pill border border-line bg-canvas/60 px-2.5 py-1 text-xs text-ink-muted',
+  quiet:
+    'rounded-pill border border-line px-2.5 py-1 text-xs text-ink-subtle',
+};
+---
+
+<span class:list={[tones[tone], className]}>
+  <slot />
+</span>

@@ -1,0 +1,48 @@
+---
+/**
+ * Primary and ghost CTAs. Default = inverse pill (Book a call).
+ */
+interface Props {
+  href: string;
+  class?: string;
+  variant?: 'primary' | 'ghost';
+  size?: 'sm' | 'md';
+  external?: boolean;
+  download?: boolean | string;
+}
+
+const {
+  href,
+  class: className,
+  variant = 'primary',
+  size = 'sm',
+  external = false,
+  download,
+} = Astro.props;
+
+const variants = {
+  primary:
+    'inline-flex items-center justify-center rounded-pill border border-cta bg-cta font-medium text-cta-fg transition-colors hover:bg-white',
+  ghost: 'text-sm text-ink-muted transition-colors hover:text-ink',
+};
+
+const sizes = {
+  sm: 'px-3.5 py-1.5 text-sm',
+  md: 'px-5 py-2.5 text-sm',
+};
+---
+
+<a
+  href={href}
+  class:list={[
+    variants[variant],
+    variant === 'primary' && sizes[size],
+    className,
+  ]}
+  {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+  {...(download !== undefined
+    ? { download: download === true ? true : download }
+    : {})}
+>
+  <slot />
+</a>

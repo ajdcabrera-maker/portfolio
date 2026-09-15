@@ -10,7 +10,7 @@ const { title, description } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en" class="bg-neutral-950">
+<html lang="en" class="bg-canvas">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -18,7 +18,7 @@ const { title, description } = Astro.props;
     {description && <meta name="description" content={description} />}
     <title>{title}</title>
   </head>
-  <body class="min-h-screen bg-neutral-950 text-neutral-100">
+  <body class="min-h-screen bg-canvas text-ink">
     <slot />
   </body>
 </html>

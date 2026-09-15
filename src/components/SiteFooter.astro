@@ -1,45 +1,42 @@
 ---
-const calUrl = 'https://cal.com/aaron-cabrera-27ln1w';
+import { site } from '../lib/site';
+import Container from '../ds/Container.astro';
+
 const year = new Date().getFullYear();
-const links = [
-  { href: '/projects', label: 'Projects' },
-  { href: '/about', label: 'About' },
-  { href: '/resume', label: 'Resume' },
-];
 ---
 
-<footer class="border-t border-neutral-800">
-  <div
-    class="mx-auto flex max-w-6xl flex-col gap-8 px-6 py-12 sm:flex-row sm:items-end sm:justify-between"
+<footer class="border-t border-line">
+  <Container
+    class="flex flex-col gap-8 py-12 sm:flex-row sm:items-end sm:justify-between"
   >
     <div class="space-y-3">
-      <p class="text-sm font-medium text-neutral-100">Aaron Cabrera</p>
-      <p class="max-w-sm text-sm leading-relaxed text-neutral-500">
-        AI systems & product design — Design Ops, token governance, and code
+      <p class="text-sm font-medium text-ink">{site.name}</p>
+      <p class="max-w-sm text-sm leading-relaxed text-ink-subtle">
+        AI systems, product design, Design Ops, token governance, and code
         automation.
       </p>
-      <p class="text-xs text-neutral-600">© {year} Aaron Cabrera</p>
+      <p class="text-xs text-ink-subtle">© {year} {site.name}</p>
     </div>
 
     <div class="flex flex-wrap items-center gap-4 text-sm">
       {
-        links.map((link) => (
+        site.nav.map((link) => (
           <a
             href={link.href}
-            class="text-neutral-400 transition-colors hover:text-neutral-100"
+            class="text-ink-muted transition-colors hover:text-ink"
           >
             {link.label}
           </a>
         ))
       }
       <a
-        href={calUrl}
+        href={site.calUrl}
         target="_blank"
         rel="noopener noreferrer"
-        class="text-neutral-100 transition-colors hover:text-white"
+        class="text-ink transition-colors hover:text-white"
       >
         Book a call →
       </a>
     </div>
-  </div>
+  </Container>
 </footer>

@@ -1,0 +1,19 @@
+---
+/**
+ * Section / page eyebrow label (uppercase tracked caption).
+ */
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<p
+  class:list={[
+    'text-sm font-medium uppercase tracking-[0.14em] text-ink-subtle',
+    className,
+  ]}
+>
+  <slot />
+</p>

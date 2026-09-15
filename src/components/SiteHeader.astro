@@ -1,12 +1,10 @@
 ---
-const calUrl = 'https://cal.com/aaron-cabrera-27ln1w';
-const pathname = Astro.url.pathname;
+import { site } from '../lib/site';
+import Container from '../ds/Container.astro';
+import Button from '../ds/Button.astro';
 
-const links = [
-  { href: '/projects', label: 'Projects' },
-  { href: '/about', label: 'About' },
-  { href: '/resume', label: 'Resume' },
-];
+const pathname = Astro.url.pathname;
+const links = site.nav;
 
 function isActive(href: string) {
   return pathname === href || pathname.startsWith(`${href}/`);
@@ -14,23 +12,22 @@ function isActive(href: string) {
 ---
 
 <header
-  class="sticky top-0 z-30 border-b border-neutral-900/80 bg-neutral-950/80 backdrop-blur-md"
+  class="sticky top-0 z-30 border-b border-line-soft bg-canvas-subtle backdrop-blur-md"
 >
-  <div
-    class="mx-auto flex max-w-6xl items-center justify-between gap-3 px-6 py-4"
+  <Container
+    class="flex items-center justify-between gap-3 py-4"
   >
     <a
       href="/"
       class:list={[
         'min-w-0 truncate text-sm font-medium tracking-tight transition-colors hover:text-white',
-        pathname === '/' ? 'text-white' : 'text-neutral-100',
+        pathname === '/' ? 'text-white' : 'text-ink',
       ]}
     >
-      Aaron Cabrera
+      {site.name}
     </a>
 
     <div class="flex shrink-0 items-center gap-2">
-      <!-- Desktop nav links -->
       <nav aria-label="Primary" class="hidden items-center gap-1 md:flex">
         {
           links.map((link) => {
@@ -40,10 +37,10 @@ function isActive(href: string) {
                 href={link.href}
                 aria-current={active ? 'page' : undefined}
                 class:list={[
-                  'rounded-lg px-3 py-1.5 text-sm transition-colors',
+                  'rounded-control px-3 py-1.5 text-sm transition-colors',
                   active
-                    ? 'bg-neutral-900 text-neutral-50'
-                    : 'text-neutral-400 hover:bg-neutral-900 hover:text-neutral-100',
+                    ? 'bg-canvas-elevated text-ink'
+                    : 'text-ink-muted hover:bg-canvas-elevated hover:text-ink',
                 ]}
               >
                 {link.label}
@@ -53,24 +50,16 @@ function isActive(href: string) {
         }
       </nav>
 
-      <!-- Primary CTA — always visible -->
-      <a
-        href={calUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="rounded-full border border-neutral-100 bg-neutral-100 px-3.5 py-1.5 text-sm font-medium text-neutral-950 transition-colors hover:bg-white"
-      >
+      <Button href={site.calUrl} external>
         Book a call
-      </a>
+      </Button>
 
-      <!-- Mobile menu toggle (no JS) -->
       <details class="group relative md:hidden">
         <summary
-          class="flex size-9 list-none cursor-pointer items-center justify-center rounded-lg border border-neutral-800 text-neutral-300 transition-colors hover:border-neutral-700 hover:bg-neutral-900 hover:text-neutral-50 [&::-webkit-details-marker]:hidden"
+          class="flex size-9 list-none cursor-pointer items-center justify-center rounded-control border border-line text-ink-muted transition-colors hover:border-line-strong hover:bg-canvas-elevated hover:text-ink [&::-webkit-details-marker]:hidden"
           aria-label="Open menu"
         >
           <span class="sr-only">Menu</span>
-          <!-- hamburger -->
           <svg
             class="size-4 group-open:hidden"
             viewBox="0 0 16 16"
@@ -84,7 +73,6 @@ function isActive(href: string) {
               stroke-linecap="round"
             ></path>
           </svg>
-          <!-- close -->
           <svg
             class="hidden size-4 group-open:block"
             viewBox="0 0 16 16"
@@ -102,7 +90,7 @@ function isActive(href: string) {
 
         <nav
           aria-label="Mobile"
-          class="absolute right-0 top-[calc(100%+0.5rem)] w-48 overflow-hidden rounded-xl border border-neutral-800 bg-neutral-950 py-1 shadow-xl shadow-black/40"
+          class="absolute right-0 top-[calc(100%+0.5rem)] w-48 overflow-hidden rounded-card border border-line bg-canvas py-1 shadow-xl shadow-black/40"
         >
           {
             links.map((link) => {
@@ -114,8 +102,8 @@ function isActive(href: string) {
                   class:list={[
                     'block px-4 py-2.5 text-sm transition-colors',
                     active
-                      ? 'bg-neutral-900 text-neutral-50'
-                      : 'text-neutral-400 hover:bg-neutral-900 hover:text-neutral-100',
+                      ? 'bg-canvas-elevated text-ink'
+                      : 'text-ink-muted hover:bg-canvas-elevated hover:text-ink',
                   ]}
                 >
                   {link.label}
@@ -126,5 +114,5 @@ function isActive(href: string) {
         </nav>
       </details>
     </div>
-  </div>
+  </Container>
 </header>

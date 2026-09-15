@@ -1,5 +1,9 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
+import Container from '../ds/Container.astro';
+import Eyebrow from '../ds/Eyebrow.astro';
+import Surface from '../ds/Surface.astro';
+import Button from '../ds/Button.astro';
 
 const cvUrl = '/Aaron-Cabrera-CV.pdf';
 
@@ -60,72 +64,63 @@ const education = {
   description="Experience timeline spanning enterprise UX, aviation platforms, product design leadership, and full-stack web development."
 >
   <main>
-    <!-- Header & download -->
-    <section class="border-b border-neutral-900">
-      <div
-        class="mx-auto flex max-w-6xl flex-col gap-8 px-6 pb-12 pt-16 sm:flex-row sm:items-end sm:justify-between sm:pb-16 sm:pt-24"
+    <section class="border-b border-line">
+      <Container
+        class="flex flex-col gap-8 pb-12 pt-16 sm:flex-row sm:items-end sm:justify-between sm:pb-16 sm:pt-24"
       >
         <div>
-          <p
-            class="text-sm font-medium uppercase tracking-[0.14em] text-neutral-500"
-          >
-            CV
-          </p>
+          <Eyebrow>CV</Eyebrow>
           <h1
-            class="mt-4 text-3xl font-semibold tracking-tight text-neutral-50 sm:text-5xl"
+            class="mt-4 text-3xl font-semibold tracking-tight text-ink sm:text-5xl"
           >
             Resume / Experience
           </h1>
-          <p class="mt-4 max-w-xl text-base leading-relaxed text-neutral-400">
+          <p class="mt-4 max-w-xl text-base leading-relaxed text-ink-muted">
             A scannable overview of roles across AI-native systems, enterprise
             workflows, aviation platforms, and product design leadership.
           </p>
         </div>
 
-        <a
-          href={cvUrl}
-          download
-          class="inline-flex shrink-0 items-center justify-center rounded-full border border-neutral-100 bg-neutral-100 px-5 py-2.5 text-sm font-medium text-neutral-950 transition-colors hover:bg-white"
-        >
+        <Button href={cvUrl} download size="md" class="shrink-0">
           Download PDF CV
-        </a>
-      </div>
+        </Button>
+      </Container>
     </section>
 
-    <!-- Experience timeline -->
-    <section class="border-b border-neutral-900">
-      <div class="mx-auto max-w-6xl px-6 py-16 sm:py-20">
-        <h2
-          class="text-sm font-medium uppercase tracking-[0.14em] text-neutral-500"
-        >
-          Experience
-        </h2>
+    <section class="border-b border-line">
+      <Container class="py-16 sm:py-20">
+        <Eyebrow>Experience</Eyebrow>
 
-        <ol class="relative mt-10 space-y-0 border-l border-neutral-800 ml-2 sm:ml-3">
+        <ol
+          class="relative ml-2 mt-10 space-y-0 border-l border-line sm:ml-3"
+        >
           {
             experience.map((job) => (
               <li class="relative pb-12 pl-8 last:pb-0 sm:pl-10">
                 <span
-                  class="absolute -left-[5px] top-1.5 size-2.5 rounded-full border border-neutral-600 bg-neutral-950"
+                  class="absolute -left-[5px] top-1.5 size-2.5 rounded-full border border-ink-subtle bg-canvas"
                   aria-hidden="true"
                 />
 
                 <div class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
                   <div>
-                    <h3 class="text-lg font-semibold tracking-tight text-neutral-50">
+                    <h3 class="text-lg font-semibold tracking-tight text-ink">
                       {job.role}
                     </h3>
-                    <p class="mt-1 text-sm text-neutral-300">{job.company}</p>
+                    <p class="mt-1 text-sm text-ink-muted">{job.company}</p>
                   </div>
-                  <time class="shrink-0 font-mono text-xs text-neutral-500 sm:text-right">
+                  <time class="shrink-0 font-mono text-xs text-ink-subtle sm:text-right">
                     {job.period}
                   </time>
                 </div>
 
                 <ul class="mt-4 space-y-2">
                   {job.highlights.map((item) => (
-                    <li class="flex gap-3 text-sm leading-relaxed text-neutral-400">
-                      <span class="mt-2 size-1 shrink-0 rounded-full bg-neutral-600" aria-hidden="true" />
+                    <li class="flex gap-3 text-sm leading-relaxed text-ink-muted">
+                      <span
+                        class="mt-2 size-1 shrink-0 rounded-full bg-ink-subtle"
+                        aria-hidden="true"
+                      />
                       <span>{item}</span>
                     </li>
                   ))}
@@ -134,32 +129,27 @@ const education = {
             ))
           }
         </ol>
-      </div>
+      </Container>
     </section>
 
-    <!-- Education -->
     <section>
-      <div class="mx-auto max-w-6xl px-6 py-16 sm:py-20">
-        <h2
-          class="text-sm font-medium uppercase tracking-[0.14em] text-neutral-500"
-        >
-          Education
-        </h2>
+      <Container class="py-16 sm:py-20">
+        <Eyebrow>Education</Eyebrow>
 
-        <div
-          class="mt-10 rounded-2xl border border-neutral-800 bg-neutral-900/50 p-6 sm:flex sm:items-baseline sm:justify-between sm:p-7"
+        <Surface
+          class="mt-10 bg-canvas-elevated/50 p-6 sm:flex sm:items-baseline sm:justify-between sm:p-7"
         >
           <div>
-            <h3 class="text-lg font-semibold tracking-tight text-neutral-50">
+            <h3 class="text-lg font-semibold tracking-tight text-ink">
               {education.degree}
             </h3>
-            <p class="mt-1 text-sm text-neutral-300">{education.school}</p>
+            <p class="mt-1 text-sm text-ink-muted">{education.school}</p>
           </div>
-          <time class="mt-3 block font-mono text-xs text-neutral-500 sm:mt-0">
+          <time class="mt-3 block font-mono text-xs text-ink-subtle sm:mt-0">
             {education.period}
           </time>
-        </div>
-      </div>
+        </Surface>
+      </Container>
     </section>
   </main>
 </SiteLayout>

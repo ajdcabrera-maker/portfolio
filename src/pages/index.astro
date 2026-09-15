@@ -1,6 +1,13 @@
 ---
 import { getCollection } from 'astro:content';
+import { site } from '../lib/site';
 import SiteLayout from '../layouts/SiteLayout.astro';
+import Container from '../ds/Container.astro';
+import Eyebrow from '../ds/Eyebrow.astro';
+import Button from '../ds/Button.astro';
+import Surface from '../ds/Surface.astro';
+import Pill from '../ds/Pill.astro';
+import MetricBadge from '../ds/MetricBadge.astro';
 
 const projects = (await getCollection('projects')).sort(
   (a, b) => a.data.order - b.data.order,
@@ -11,157 +18,152 @@ const expertise = [
     number: '01',
     title: 'AI-Native Systems Architecture',
     description:
-      'Design contracts and agent workflows with `.design.md`, Paper MCP, and Cursor — keeping generated UI aligned to tokens and human review.',
-    tags: ['.design.md', 'Paper MCP', 'Cursor'],
+      'Design contracts and agent workflows with DESIGN.md, Paper MCP, and Cursor. Keeping generated UI aligned to tokens and human review.',
+    tags: ['DESIGN.md', 'Paper MCP', 'Cursor'],
   },
   {
     number: '02',
     title: 'Enterprise Workflow Optimization',
     description:
-      'Translate dense domain logic into clear multi-role interfaces — reducing friction across complex operational and financial systems.',
-    tags: ['Complex Domain Logic', 'Internal Tools', 'IA'],
+      'Translate dense domain logic into clear multi-role interfaces. Reducing friction across complex operational and financial systems.',
+    tags: ['Domain Logic', 'Internal Tools', 'IA'],
   },
   {
     number: '03',
     title: 'Scalable Design Ops & UI Leadership',
     description:
-      'Build design infrastructure that scales teams and products — systems, governance, and data-driven UI decisions with measurable impact.',
-    tags: ['Design Ops', 'Design Systems', 'Leadership'],
+      'Build design infrastructure that scales teams and products. Systems, governance, and data-driven UI decisions with measurable impact.',
+    tags: ['Design Ops', 'Systems', 'Leadership'],
   },
 ];
 ---
 
 <SiteLayout
-  title="Aaron Cabrera — AI Systems & Product Designer"
-  description="Bridging Design Ops, token governance, and code automation with .design.md, Paper MCP, and Cursor workflows."
+  title="Aaron Cabrera, AI Systems & Product Designer"
+  description="Bridging Design Ops, token governance, and code automation with DESIGN.md, Paper MCP, and Cursor workflows."
 >
   <main>
-    <!-- Hero -->
-    <section class="border-b border-neutral-900">
-      <div class="mx-auto max-w-6xl px-6 pb-20 pt-16 sm:pb-28 sm:pt-24">
-        <p
-          class="text-sm font-medium uppercase tracking-[0.14em] text-neutral-500"
-        >
-          Portfolio
-        </p>
-        <h1
-          class="mt-5 max-w-4xl text-3xl font-semibold tracking-tight text-neutral-50 sm:text-5xl sm:leading-[1.1]"
-        >
-          Aaron Cabrera — AI Systems & Product Designer
-        </h1>
-        <p
-          class="mt-6 max-w-2xl text-lg leading-relaxed text-neutral-400 sm:text-xl"
-        >
-          Bridging Design Ops, token governance, and code automation with
-          <code
-            class="rounded-md border border-neutral-800 bg-neutral-900 px-1.5 py-0.5 font-mono text-[0.9em] text-emerald-300"
-            >.design.md</code
-          >, Paper MCP, and Cursor workflows.
-        </p>
+    <section class="border-b border-line">
+      <Container class="pb-20 pt-16 sm:pb-28 sm:pt-24">
+        <Eyebrow>Portfolio</Eyebrow>
 
         <div
-          class="mt-10 flex flex-col gap-3 border-t border-neutral-800 pt-8 text-sm text-neutral-400 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-6 sm:gap-y-2"
+          class="mt-6 flex flex-col items-start gap-8 sm:mt-8 sm:flex-row sm:items-center"
+        >
+          <img
+            src="/aaron-cabrera.png"
+            alt="Aaron Cabrera"
+            width="160"
+            height="160"
+            class="size-40 shrink-0 rounded-pill object-cover object-center"
+          />
+
+          <div class="flex min-w-0 flex-col gap-8">
+            <div class="flex flex-col gap-2">
+              <h1
+                class="text-3xl font-semibold tracking-tight text-ink sm:text-5xl sm:leading-[1.1]"
+              >
+                Aaron Cabrera
+              </h1>
+              <p class="text-lg leading-relaxed text-ink-muted sm:text-xl">
+                AI Systems & Product Designer
+              </p>
+            </div>
+
+            <p
+              class="max-w-xl text-lg leading-relaxed text-ink-muted sm:text-xl"
+            >
+              Bridging Design Ops, token governance, and code automation with
+              <code class="code-inline">DESIGN.md</code>, Paper MCP, and Cursor
+              workflows.
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="mt-10 border-t border-line pt-8 text-sm text-ink-muted"
         >
           <p>
-            <span class="text-neutral-500">Now</span>
-            <span class="mx-2 text-neutral-700">·</span>
+            <span class="text-ink-subtle">Now</span>
+            <span class="mx-2 text-ink-subtle">·</span>
             Senior UX/UI Designer at
-            <span class="text-neutral-200">Partners Group</span>
-          </p>
-          <p class="hidden text-neutral-700 sm:inline" aria-hidden="true">|</p>
-          <p>
-            <span class="text-neutral-500">Formerly</span>
-            <span class="mx-2 text-neutral-700">·</span>
-            Usability & Design Manager at
-            <span class="text-neutral-200">Cebu Pacific</span>
+            <span class="text-ink">Partners Group</span>
           </p>
         </div>
-      </div>
+      </Container>
     </section>
 
-    <!-- Featured Projects -->
-    <section id="projects" class="border-b border-neutral-900">
-      <div class="mx-auto max-w-6xl px-6 py-20 sm:py-24">
-        <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+    <section id="projects" class="border-b border-line">
+      <Container class="py-20 sm:py-24">
+        <div
+          class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between"
+        >
           <div>
-            <p
-              class="text-sm font-medium uppercase tracking-[0.14em] text-neutral-500"
-            >
-              Selected work
-            </p>
+            <Eyebrow>Selected work</Eyebrow>
             <h2
-              class="mt-3 text-2xl font-semibold tracking-tight text-neutral-50 sm:text-3xl"
+              class="mt-3 text-2xl font-semibold tracking-tight text-ink sm:text-3xl"
             >
               Featured projects
             </h2>
           </div>
-          <a
-            href="/projects"
-            class="text-sm text-neutral-400 transition-colors hover:text-neutral-100"
-          >
+          <Button href="/projects" variant="ghost">
             View all projects →
-          </a>
+          </Button>
         </div>
 
         <div class="mt-12 grid gap-4 sm:grid-cols-2">
           {
             projects.map((project) => (
-              <a
+              <Surface
                 href={`/projects/${project.slug}`}
-                class="group flex flex-col rounded-2xl border border-neutral-800 bg-neutral-900/40 p-6 transition-colors hover:border-neutral-700 hover:bg-neutral-900 sm:p-7"
+                interactive
+                class="group flex h-full flex-col bg-canvas-elevated/40 p-6 sm:p-7"
               >
                 <div class="flex items-start justify-between gap-4">
-                  <span class="font-mono text-xs text-neutral-600">
+                  <span class="font-mono text-xs text-ink-subtle">
                     {String(project.data.order).padStart(2, '0')}
                   </span>
-                  <span class="text-sm text-neutral-600 transition-colors group-hover:text-neutral-300">
+                  <span class="text-sm text-ink-subtle transition-colors group-hover:text-ink-muted">
                     →
                   </span>
                 </div>
 
-                <h3 class="mt-4 text-lg font-semibold tracking-tight text-neutral-50 transition-colors group-hover:text-white">
+                <h3 class="mt-4 text-lg font-semibold tracking-tight text-ink transition-colors group-hover:text-white">
                   {project.data.title}
                 </h3>
-                <p class="mt-3 flex-1 text-sm leading-relaxed text-neutral-400">
+                <p class="mt-3 flex-1 text-sm leading-relaxed text-ink-muted">
                   {project.data.subtitle}
                 </p>
 
-                {
-                  project.data.metrics && project.data.metrics.length > 0 && (
-                    <div class="mt-6 flex flex-wrap gap-2">
-                      {project.data.metrics.map((metric) => (
-                        <span class="rounded-lg bg-neutral-100 px-2.5 py-1 text-xs font-medium text-neutral-950">
-                          {metric}
-                        </span>
-                      ))}
-                    </div>
-                  )
-                }
+                <div class="mt-auto pt-6">
+                  {
+                    project.data.metrics && project.data.metrics.length > 0 && (
+                      <div class="mb-5 flex flex-wrap gap-2">
+                        {project.data.metrics.map((metric) => (
+                          <MetricBadge>{metric}</MetricBadge>
+                        ))}
+                      </div>
+                    )
+                  }
 
-                <div class="mt-5 flex flex-wrap gap-2 border-t border-neutral-800/80 pt-5">
-                  {project.data.stack.map((item) => (
-                    <span class="rounded-full border border-neutral-800 bg-neutral-950/60 px-2.5 py-1 text-xs text-neutral-400">
-                      {item}
-                    </span>
-                  ))}
+                  <div class="flex flex-wrap gap-2 border-t border-line-soft pt-5">
+                    {project.data.stack.map((item) => (
+                      <Pill>{item}</Pill>
+                    ))}
+                  </div>
                 </div>
-              </a>
+              </Surface>
             ))
           }
         </div>
-      </div>
+      </Container>
     </section>
 
-    <!-- Core Expertise -->
-    <section class="border-b border-neutral-900">
-      <div class="mx-auto max-w-6xl px-6 py-20 sm:py-24">
-        <p
-          class="text-sm font-medium uppercase tracking-[0.14em] text-neutral-500"
-        >
-          Capabilities
-        </p>
+    <section class="border-b border-line">
+      <Container class="py-20 sm:py-24">
+        <Eyebrow>Capabilities</Eyebrow>
         <h2
-          class="mt-3 text-2xl font-semibold tracking-tight text-neutral-50 sm:text-3xl"
+          class="mt-3 text-2xl font-semibold tracking-tight text-ink sm:text-3xl"
         >
           Core expertise
         </h2>
@@ -169,54 +171,51 @@ const expertise = [
         <div class="mt-12 grid gap-4 lg:grid-cols-3">
           {
             expertise.map((pillar) => (
-              <article class="rounded-2xl border border-neutral-800 bg-neutral-950 p-6 sm:p-7">
-                <p class="font-mono text-xs text-emerald-400/80">
+              <Surface
+                as="article"
+                class="flex h-full flex-col bg-canvas p-6 sm:p-7"
+              >
+                <p class="font-mono text-xs text-accent-muted">
                   {pillar.number}
                 </p>
-                <h3 class="mt-4 text-lg font-semibold tracking-tight text-neutral-50">
+                <h3 class="mt-4 text-lg font-semibold tracking-tight text-ink">
                   {pillar.title}
                 </h3>
-                <p class="mt-3 text-sm leading-relaxed text-neutral-400">
+                <p class="mt-3 flex-1 text-sm leading-relaxed text-ink-muted">
                   {pillar.description}
                 </p>
                 <div class="mt-6 flex flex-wrap gap-2">
                   {pillar.tags.map((tag) => (
-                    <span class="rounded-full border border-neutral-800 px-2.5 py-1 text-xs text-neutral-500">
-                      {tag}
-                    </span>
+                    <Pill tone="quiet">{tag}</Pill>
                   ))}
                 </div>
-              </article>
+              </Surface>
             ))
           }
         </div>
-      </div>
+      </Container>
     </section>
 
-    <!-- CTA strip -->
     <section>
-      <div class="mx-auto max-w-6xl px-6 py-20 sm:py-24">
-        <div
-          class="rounded-2xl border border-neutral-800 bg-neutral-900/50 px-6 py-10 sm:flex sm:items-center sm:justify-between sm:px-10"
+      <Container class="py-20 sm:py-24">
+        <Surface
+          class="bg-canvas-elevated/50 px-6 py-10 sm:flex sm:items-center sm:justify-between sm:px-10"
         >
           <div>
-            <h2 class="text-xl font-semibold tracking-tight text-neutral-50 sm:text-2xl">
+            <h2
+              class="text-xl font-semibold tracking-tight text-ink sm:text-2xl"
+            >
               Interested in connecting?
             </h2>
-            <p class="mt-2 text-sm text-neutral-400">
+            <p class="mt-2 text-sm text-ink-muted">
               Let’s talk projects, Design Ops, or AI-native product systems.
             </p>
           </div>
-          <a
-            href="https://cal.com/aaron-cabrera-27ln1w"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="mt-6 inline-flex rounded-full border border-neutral-100 bg-neutral-100 px-5 py-2.5 text-sm font-medium text-neutral-950 transition-colors hover:bg-white sm:mt-0"
-          >
+          <Button href={site.calUrl} external size="md" class="mt-6 sm:mt-0">
             Book a call
-          </a>
-        </div>
-      </div>
+          </Button>
+        </Surface>
+      </Container>
     </section>
   </main>
 </SiteLayout>

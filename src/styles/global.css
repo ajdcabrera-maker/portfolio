@@ -1,9 +1,17 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
+@import "./tokens.css";
 
 @layer base {
   html {
-    @apply bg-neutral-950 text-neutral-100 antialiased;
+    @apply bg-canvas text-ink antialiased;
+  }
+}
+
+@layer components {
+  .code-inline {
+    @apply rounded-md border border-line bg-canvas-elevated px-1.5 py-0.5
+      font-mono text-[0.9em] text-accent;
   }
 }
 
@@ -12,25 +20,25 @@
   .case-study-prose {
     @apply prose prose-invert max-w-none
       prose-headings:scroll-mt-24 prose-headings:font-semibold prose-headings:tracking-tight
-      prose-h2:mt-14 prose-h2:mb-4 prose-h2:text-2xl prose-h2:text-neutral-50
-      prose-h3:mt-10 prose-h3:mb-3 prose-h3:text-xl prose-h3:text-neutral-100
-      prose-p:text-neutral-300 prose-p:leading-relaxed
-      prose-strong:text-neutral-100 prose-strong:font-semibold
-      prose-a:text-neutral-100 prose-a:underline prose-a:decoration-neutral-600
-      prose-a:underline-offset-4 hover:prose-a:decoration-neutral-300
-      prose-li:text-neutral-300 prose-li:marker:text-neutral-500
-      prose-hr:border-neutral-800;
+      prose-h2:mt-14 prose-h2:mb-4 prose-h2:text-2xl prose-h2:text-ink
+      prose-h3:mt-10 prose-h3:mb-3 prose-h3:text-xl prose-h3:text-ink
+      prose-p:text-ink-muted prose-p:leading-relaxed
+      prose-strong:text-ink prose-strong:font-semibold
+      prose-a:text-ink prose-a:underline prose-a:decoration-line
+      prose-a:underline-offset-4 hover:prose-a:decoration-ink-muted
+      prose-li:text-ink-muted prose-li:marker:text-ink-subtle
+      prose-hr:border-line;
   }
 
   .case-study-prose :where(code):not(:where(pre *)) {
-    @apply rounded-md border border-neutral-800 bg-neutral-900 px-1.5 py-0.5
-      font-mono text-[0.875em] font-normal text-emerald-300
+    @apply rounded-md border border-line bg-canvas-elevated px-1.5 py-0.5
+      font-mono text-[0.875em] font-normal text-accent
       before:content-none after:content-none;
   }
 
   .case-study-prose pre {
-    @apply overflow-x-auto rounded-xl border border-neutral-800 bg-neutral-900
-      p-4 text-sm leading-relaxed text-neutral-200 shadow-none;
+    @apply overflow-x-auto rounded-card border border-line bg-canvas-elevated
+      p-4 text-sm leading-relaxed text-ink-muted shadow-none;
   }
 
   .case-study-prose pre code {
@@ -38,29 +46,29 @@
   }
 
   .case-study-prose blockquote {
-    @apply border-l-2 border-emerald-500/70 bg-neutral-900/60 py-1 pl-5 pr-4
-      not-italic text-neutral-300;
+    @apply border-l-2 border-accent-muted bg-canvas-elevated/60 py-1 pl-5 pr-4
+      not-italic text-ink-muted;
   }
 
   .case-study-prose blockquote p {
-    @apply text-neutral-300;
+    @apply text-ink-muted;
   }
 
   .case-study-prose table {
-    @apply w-full border-collapse overflow-hidden rounded-xl
-      border border-neutral-800 text-sm;
+    @apply w-full border-collapse overflow-hidden rounded-card
+      border border-line text-sm;
   }
 
   .case-study-prose thead {
-    @apply bg-neutral-900 text-left text-neutral-200;
+    @apply bg-canvas-elevated text-left text-ink-muted;
   }
 
   .case-study-prose th {
-    @apply border-b border-neutral-800 px-4 py-3 font-medium;
+    @apply border-b border-line px-4 py-3 font-medium;
   }
 
   .case-study-prose td {
-    @apply border-b border-neutral-800/80 px-4 py-3 text-neutral-300;
+    @apply border-b border-line-soft px-4 py-3 text-ink-muted;
   }
 
   .case-study-prose tbody tr:last-child td {
@@ -68,6 +76,6 @@
   }
 
   .case-study-prose tbody tr:hover {
-    @apply bg-neutral-900/40;
+    @apply bg-canvas-elevated/40;
   }
 }

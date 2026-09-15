@@ -1,0 +1,19 @@
+---
+/**
+ * High-contrast metric chip (e.g. +15% CSAT).
+ */
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<span
+  class:list={[
+    'rounded-lg bg-cta px-2.5 py-1 text-xs font-medium text-cta-fg',
+    className,
+  ]}
+>
+  <slot />
+</span>

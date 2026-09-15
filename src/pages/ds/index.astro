@@ -1,0 +1,330 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import Container from '../../ds/Container.astro';
+import Eyebrow from '../../ds/Eyebrow.astro';
+import Button from '../../ds/Button.astro';
+import Pill from '../../ds/Pill.astro';
+import MetricBadge from '../../ds/MetricBadge.astro';
+import Surface from '../../ds/Surface.astro';
+
+const surfaces = [
+  { name: 'canvas', class: 'bg-canvas', hex: '#0a0a0a' },
+  { name: 'canvas-elevated', class: 'bg-canvas-elevated', hex: '#171717' },
+  { name: 'cta', class: 'bg-cta', hex: '#f5f5f5', dark: true },
+  { name: 'accent', class: 'bg-accent', hex: '#6ee7b7', dark: true },
+];
+
+const inkScale = [
+  { name: 'ink', class: 'text-ink', role: 'Primary — headings & emphasis' },
+  { name: 'ink-muted', class: 'text-ink-muted', role: 'Secondary — body & lead' },
+  { name: 'ink-subtle', class: 'text-ink-subtle', role: 'Tertiary — meta & eyebrows' },
+];
+
+const lines = [
+  { name: 'line', class: 'border-line' },
+  { name: 'line-strong', class: 'border-line-strong' },
+  { name: 'line-soft', class: 'border-line-soft' },
+];
+
+const radii = [
+  { name: 'rounded-control', class: 'rounded-control' },
+  { name: 'rounded-card', class: 'rounded-card' },
+  { name: 'rounded-pill', class: 'rounded-pill' },
+];
+---
+
+<SiteLayout
+  title="Design System — Aaron Cabrera"
+  description="Internal gallery for portfolio design tokens and primitives."
+>
+  <main>
+    <section class="border-b border-line">
+      <Container class="pb-12 pt-16 sm:pb-16 sm:pt-24">
+        <Eyebrow>Internal</Eyebrow>
+        <h1
+          class="mt-4 text-3xl font-semibold tracking-tight text-ink sm:text-5xl"
+        >
+          Design system
+        </h1>
+        <p class="mt-5 max-w-2xl text-lg leading-relaxed text-ink-muted">
+          Visual reference for tokens and <code class="code-inline">src/ds</code>
+          primitives. Contract lives in
+          <code class="code-inline">DESIGN.md</code>. Not linked in primary nav.
+        </p>
+      </Container>
+    </section>
+
+    <!-- Color surfaces -->
+    <section class="border-b border-line">
+      <Container class="py-16 sm:py-20">
+        <Eyebrow>Tokens</Eyebrow>
+        <h2
+          class="mt-3 text-2xl font-semibold tracking-tight text-ink sm:text-3xl"
+        >
+          Surfaces & accent
+        </h2>
+        <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {
+            surfaces.map((swatch) => (
+              <div class="space-y-3">
+                <div
+                  class:list={[
+                    'h-24 border border-line',
+                    swatch.class,
+                    'rounded-card',
+                  ]}
+                />
+                <div>
+                  <p class="font-mono text-sm text-ink">{swatch.name}</p>
+                  <p class="font-mono text-xs text-ink-subtle">{swatch.hex}</p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </Container>
+    </section>
+
+    <!-- Ink scale -->
+    <section class="border-b border-line">
+      <Container class="py-16 sm:py-20">
+        <Eyebrow>Typography color</Eyebrow>
+        <h2
+          class="mt-3 text-2xl font-semibold tracking-tight text-ink sm:text-3xl"
+        >
+          Ink scale
+        </h2>
+        <ul class="mt-10 space-y-3">
+          {
+            inkScale.map((tone) => (
+              <li class="flex items-baseline justify-between gap-4 border-b border-line-soft py-3">
+                <span class:list={['text-base', tone.class]}>
+                  The quick brown fox
+                </span>
+                <span class="shrink-0 text-right font-mono text-xs text-ink-subtle">
+                  <span class="block text-ink-muted">{tone.name}</span>
+                  <span class="mt-0.5 block">{tone.role}</span>
+                </span>
+              </li>
+            ))
+          }
+        </ul>
+      </Container>
+    </section>
+
+    <!-- Lines & radii -->
+    <section class="border-b border-line">
+      <Container class="py-16 sm:py-20">
+        <div class="grid gap-12 lg:grid-cols-2">
+          <div>
+            <Eyebrow>Borders</Eyebrow>
+            <h2
+              class="mt-3 text-2xl font-semibold tracking-tight text-ink"
+            >
+              Lines
+            </h2>
+            <div class="mt-8 space-y-4">
+              {
+                lines.map((line) => (
+                  <div>
+                    <div class:list={['h-0 border-t-2', line.class]} />
+                    <p class="mt-2 font-mono text-xs text-ink-subtle">
+                      {line.name}
+                    </p>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+          <div>
+            <Eyebrow>Shape</Eyebrow>
+            <h2
+              class="mt-3 text-2xl font-semibold tracking-tight text-ink"
+            >
+              Radii
+            </h2>
+            <div class="mt-8 flex flex-wrap gap-4">
+              {
+                radii.map((r) => (
+                  <div class="space-y-2">
+                    <div
+                      class:list={[
+                        'size-20 border border-line bg-canvas-elevated',
+                        r.class,
+                      ]}
+                    />
+                    <p class="font-mono text-xs text-ink-subtle">{r.name}</p>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+      </Container>
+    </section>
+
+    <!-- Type scale -->
+    <section class="border-b border-line">
+      <Container class="py-16 sm:py-20">
+        <Eyebrow>Type</Eyebrow>
+        <h2
+          class="mt-3 text-2xl font-semibold tracking-tight text-ink sm:text-3xl"
+        >
+          Hierarchy
+        </h2>
+        <div class="mt-10 space-y-8">
+          <div>
+            <Eyebrow>Eyebrow</Eyebrow>
+            <p class="mt-2 font-mono text-xs text-ink-subtle">Eyebrow.astro</p>
+          </div>
+          <div>
+            <h1
+              class="text-3xl font-semibold tracking-tight text-ink sm:text-5xl"
+            >
+              Display / page title
+            </h1>
+            <p class="mt-2 font-mono text-xs text-ink-subtle">
+              text-3xl sm:text-5xl font-semibold text-ink
+            </p>
+          </div>
+          <div>
+            <p class="text-lg leading-relaxed text-ink-muted sm:text-xl">
+              Lead body — role line, hero support, and other secondary sentences.
+            </p>
+            <p class="mt-2 font-mono text-xs text-ink-subtle">
+              text-lg sm:text-xl leading-relaxed text-ink-muted
+            </p>
+          </div>
+          <div>
+            <p class="text-sm leading-relaxed text-ink-muted">
+              Card / section body copy at readable density.
+            </p>
+            <p class="mt-2 font-mono text-xs text-ink-subtle">
+              text-sm text-ink-muted
+            </p>
+          </div>
+          <div>
+            <p>
+              Inline code chip:
+              <code class="code-inline">DESIGN.md</code>
+            </p>
+            <p class="mt-2 font-mono text-xs text-ink-subtle">.code-inline</p>
+          </div>
+        </div>
+      </Container>
+    </section>
+
+    <!-- Buttons -->
+    <section class="border-b border-line">
+      <Container class="py-16 sm:py-20">
+        <Eyebrow>Primitive</Eyebrow>
+        <h2
+          class="mt-3 text-2xl font-semibold tracking-tight text-ink sm:text-3xl"
+        >
+          Button
+        </h2>
+        <p class="mt-3 font-mono text-xs text-ink-subtle">Button.astro</p>
+        <div class="mt-10 flex flex-wrap items-center gap-4">
+          <Button href="#button">Primary sm</Button>
+          <Button href="#button" size="md">Primary md</Button>
+          <Button href="#button" variant="ghost">Ghost link →</Button>
+        </div>
+      </Container>
+    </section>
+
+    <!-- Pills & metrics -->
+    <section class="border-b border-line">
+      <Container class="py-16 sm:py-20">
+        <div class="grid gap-12 lg:grid-cols-2">
+          <div>
+            <Eyebrow>Primitive</Eyebrow>
+            <h2
+              class="mt-3 text-2xl font-semibold tracking-tight text-ink"
+            >
+              Pill
+            </h2>
+            <p class="mt-3 font-mono text-xs text-ink-subtle">Pill.astro</p>
+            <div class="mt-8 flex flex-wrap gap-2">
+              <Pill>DESIGN.md</Pill>
+              <Pill>Paper MCP</Pill>
+              <Pill>Cursor</Pill>
+              <Pill tone="quiet">Quiet tone</Pill>
+            </div>
+          </div>
+          <div>
+            <Eyebrow>Primitive</Eyebrow>
+            <h2
+              class="mt-3 text-2xl font-semibold tracking-tight text-ink"
+            >
+              MetricBadge
+            </h2>
+            <p class="mt-3 font-mono text-xs text-ink-subtle">
+              MetricBadge.astro
+            </p>
+            <div class="mt-8 flex flex-wrap gap-2">
+              <MetricBadge>+15% CSAT</MetricBadge>
+              <MetricBadge>+3% Conversion</MetricBadge>
+              <MetricBadge>0 Token Drift</MetricBadge>
+            </div>
+          </div>
+        </div>
+      </Container>
+    </section>
+
+    <!-- Surface -->
+    <section class="border-b border-line">
+      <Container class="py-16 sm:py-20">
+        <Eyebrow>Primitive</Eyebrow>
+        <h2
+          class="mt-3 text-2xl font-semibold tracking-tight text-ink sm:text-3xl"
+        >
+          Surface
+        </h2>
+        <p class="mt-3 font-mono text-xs text-ink-subtle">Surface.astro</p>
+        <div class="mt-10 grid gap-4 sm:grid-cols-2">
+          <Surface class="bg-canvas-elevated/50 p-6">
+            <p class="text-sm font-medium text-ink">Static surface</p>
+            <p class="mt-2 text-sm text-ink-muted">
+              Default bordered card for principles, toolkit, education.
+            </p>
+          </Surface>
+          <Surface
+            href="#surface"
+            interactive
+            class="bg-canvas-elevated/40 p-6"
+          >
+            <p class="text-sm font-medium text-ink">Interactive surface</p>
+            <p class="mt-2 text-sm text-ink-muted">
+              Hover border + fill for project cards and adjacent nav.
+            </p>
+          </Surface>
+        </div>
+      </Container>
+    </section>
+
+    <!-- Container note -->
+    <section>
+      <Container class="py-16 sm:py-20">
+        <Eyebrow>Primitive</Eyebrow>
+        <h2
+          class="mt-3 text-2xl font-semibold tracking-tight text-ink sm:text-3xl"
+        >
+          Container
+        </h2>
+        <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink-muted">
+          This page (and every section above) is wrapped in
+          <code class="code-inline">Container</code>
+          — <code class="code-inline">max-w-content</code> + horizontal
+          <code class="code-inline">px-6</code>.
+        </p>
+        <div
+          class="mt-10 rounded-card border border-dashed border-line-strong bg-canvas-elevated/30 px-6 py-10"
+        >
+          <p class="font-mono text-xs text-ink-subtle">
+            max-w-content (72rem) · px-6
+          </p>
+        </div>
+      </Container>
+    </section>
+  </main>
+</SiteLayout>

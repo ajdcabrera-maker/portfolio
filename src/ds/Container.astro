@@ -1,0 +1,16 @@
+---
+/**
+ * Page content width + horizontal padding.
+ * Use for every primary page section.
+ */
+interface Props {
+  class?: string;
+  as?: 'div' | 'section' | 'header' | 'footer' | 'main' | 'article' | 'nav';
+}
+
+const { class: className, as: Tag = 'div' } = Astro.props;
+---
+
+<Tag class:list={['mx-auto w-full max-w-content px-6', className]}>
+  <slot />
+</Tag>
